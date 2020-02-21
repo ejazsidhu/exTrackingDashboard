@@ -1,7 +1,7 @@
 <div id="sidebar">
     <mat-nav-list>
 
-        <ng-container *ngFor="let item of menuList;let i=index">
+        <!-- <ng-container *ngFor="let item of menuList;let i=index">
 
             <ng-container *ngIf="!item.subMenu">
                 <a mat-list-item routerLink='/dashboard/{{item.menuList[0].link}}' [routerLinkActive]="'link-active'">
@@ -30,27 +30,13 @@
 
 
                     </ul>
-                    <!-- <ul class="nested submenu" [class.expand]="showMenu == value" *ngIf="value==2 && item.header=='Reports'">
-
-                        <li *ngFor="let item2 of item.menuList">
-
-
-                            <a [routerLinkActive]="'link-active'" routerLink='/dashboard/{{item2.link}}'><span>
-                                    {{ item2.lable | translate }}</span></a>
-
-                        </li>
-
-                        <li>
-                        </li>
-
-                  
-                    </ul> -->
+                 
                 </div>
             </ng-container>
 
 
 
-        </ng-container>
+        </ng-container> -->
         <!-- <a mat-list-item routerLink='/dashboard/raw_data' [routerLinkActive]="'link-active'">
             <mat-icon class="sidenav-icon">dashboard</mat-icon> {{ 'Raw Data' | translate }}
         </a> -->
