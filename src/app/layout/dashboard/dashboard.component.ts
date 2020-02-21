@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
     var t = moment(new Date).format('YYYY-MM-DD');
     var st = localStorage.getItem('today');
     if (t > st) this.router.navigate(['/login']);
-    this.getZone();
+    // this.getZone();
     this.httpService.data.subscribe(data => {
 
       // console.log("download status subscribe",data)

@@ -38,6 +38,24 @@ configFile = config;
     withCredentials: true
   };
 
+  //#region ex tracking calls
+
+  getExTrackingDasboardData(obj){
+    let body = null;
+    if (obj != null) {
+      body = this.UrlEncodeMaker(obj);
+      
+    }
+    const url = this.ip + 'portal/ndn/secondary-sale';
+    return this.http.post(url, body, this.httpOptions);
+  }
+
+//#endregion
+
+
+//#region old CBL calls
+
+
   updatedDownloadStatus(data) {
     this.dataSource.next(data);
   }
@@ -74,11 +92,13 @@ configFile = config;
     const newUrl = url.substring(0, url.length - 1);
     return newUrl;
   }
+
+
   getDashboardData(obj) {
     let body = null;
     if (obj != null) {
       body = this.UrlEncodeMaker(obj);
-      // `zoneId=${obj.zoneId}&regionId=${obj.regionId}&endDate=${obj.endDate}&startDate=${obj.startDate}&distributionId=${obj.distributionId}&cityId=${obj.cityId}&storeType=${obj.storeType}&channelId=${obj.channelId}`;
+      
     }
     const url = this.ip + 'dashboardDataCBL';
     return this.http.post(url, body, this.httpOptions);
@@ -339,4 +359,6 @@ configFile = config;
       return this.http.post(url, obj
       );
     }
+
+    //#endregion
 }
