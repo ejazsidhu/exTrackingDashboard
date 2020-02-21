@@ -24,7 +24,11 @@
             }
         }
     }
-
+    .title-image {
+        background: white;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
     &:after {
         content: '';
         background: #fff;
@@ -44,9 +48,22 @@
         right: 0;
     }
 }
+
 .text-center {
     text-align: center;
 }
+
 .w-100 {
     width: 100%;
+}
+
+// media queries
+@media only screen and (max-width: 420px) {
+    .login-page[_ngcontent-c1] .content[_ngcontent-c1] .login-form[_ngcontent-c1] {
+        padding: 40px;
+        background: #fff;
+        width: 350px !important;
+        box-shadow: 0 0 10px #ddd;
+    }
+    /* STYLES HERE */
 }

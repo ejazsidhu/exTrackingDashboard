@@ -1,0 +1,149 @@
+<mat-card class="mb-20">
+  <mat-card-content>
+    <mat-card-title>
+      <h3>WW-WR Map View</h3>
+      <mat-spinner *ngIf="loading"></mat-spinner>
+    </mat-card-title>
+    <br>
+    <br>
+    <section class="example-section">
+        <section class="example-section">
+          <mat-form-field class="example-margin mr-5-IMP">
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="chooseDate"  placeholder="Choose Date" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="example-margin mr-5-IMP" *ngIf="isAdmin">
+            <mat-select  placeholder="Selected Region" name='Region' [(ngModel)]="selectedZoneFilter" (ngModelChange)="selectFilters('zoneSelected')">
+              <mat-option [value]="zone.id" *ngFor="let zone of zones">{{zone.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-margin mr-5-IMP">
+            <mat-select placeholder="Choose territory" name='Territory' [(ngModel)]="selectedRegionFilter"  (ngModelChange)="selectFilters('regionSelected')" >
+              <mat-option [value]="type.id" *ngFor="let type of regions"  >{{type.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-margin mr-5-IMP">
+            <mat-select placeholder="Select DE" name='SelectDE' [(ngModel)]="selectedDe" (ngModelChange)="selectFilters('deSelected')"  >
+              <mat-option [value]="de.id" *ngFor="let de of DeList">{{de.fullName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-margin mr-5-IMP">
+            <mat-select placeholder="Select DSR" name='SelectDSR' [(ngModel)]="selectedDsr" (ngModelChange)="selectFilters()"  >
+              <mat-option [value]="dsr.dsr_id" *ngFor="let dsr of DsrList">{{dsr.dsr_name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <button mat-raised-button color="warn" (click)="getShopsForDETracking()">Track</button>
+          <button mat-raised-button color="primary" (click)="resetFilters()">Reset Filters</button>
+        </section>
+      <section class="example-section">
+
+      </section>
+     <section class="example-section">
+        <agm-map  [latitude]="latitude" [longitude]="longitude" [fitBounds]="trackedShops.length > 1" [zoom]="6" >
+        <!--  <agm-marker-cluster [imagePath]="'http://ndn1.concavetech.com/dist/assets/map-marker-icons/m'">-->
+          <div *ngIf="selectedDe == -1 && selectedDsr  == -1">
+            <agm-marker
+              [agmFitBounds]="true"
+              *ngFor="let shop of trackedShops;"
+              latitude="{{shop.shop_latitude}}"
+              longitude="{{shop.shop_longitude}}"
+              iconUrl="{{colorType+shop.surveyor_id.toString().slice(-1)+'.png'}}">
+
+              <!-- (mouseOver)="showInfo($event)"  (mouseOut)="hideInfo($event)"-->
+
+
+              <agm-snazzy-info-window [maxWidth]="200">
+                <ng-template>
+                  <strong>DE Code:</strong> {{shop.de_code}}
+                  <br>
+                  <strong>DSR Code:</strong> {{shop.dsr_id}}
+                  <br>
+                  <strong>Visit Type:</strong> {{shop.survey_type}}
+                  <br>
+                  <strong>Shop Title:</strong> {{shop.shop_title}}
+                  <br>
+                  <strong>Address:</strong> {{shop.address}}
+                  <br>
+                  <a (click)="goToEvaluation(shop.survey_id, shop.survey_type)"><strong>click for view</strong><i
+                    class="fas fa-share-square"></i></a>
+
+                </ng-template>
+
+              </agm-snazzy-info-window>
+            </agm-marker>
+          </div>
+          <div *ngIf="selectedDsr == -1">
+            <agm-marker
+              [agmFitBounds]="true"
+              *ngFor="let shop of trackedShops;"
+              latitude="{{shop.shop_latitude}}"
+              longitude="{{shop.shop_longitude}}"
+              iconUrl="{{colorType+shop.dsr_id.toString().slice(-1)+'.png'}}">
+
+              <!-- (mouseOver)="showInfo($event)"  (mouseOut)="hideInfo($event)"-->
+
+
+              <agm-snazzy-info-window [maxWidth]="200" >
+                <ng-template >
+                  <strong>DE Code:</strong> {{shop.de_code}}
+                  <br>
+                  <strong>DSR Code:</strong> {{shop.dsr_id}}
+                  <br>
+                  <strong>Visit Type:</strong> {{shop.survey_type}}
+                  <br>
+                  <strong>Shop Title:</strong> {{shop.shop_title}}
+                  <br>
+                  <strong>Address:</strong> {{shop.address}}
+                  <br>
+                  <a (click)="goToEvaluation(shop.survey_id, shop.survey_type)"><strong>click for view</strong><i class="fas fa-share-square"></i></a>
+
+                </ng-template>
+
+              </agm-snazzy-info-window>
+            </agm-marker>
+          </div>
+          <div *ngIf="selectedDsr != -1">
+            <agm-marker
+              [agmFitBounds]="true"
+              *ngFor="let shop of trackedShops;"
+              latitude="{{shop.shop_latitude}}"
+              longitude="{{shop.shop_longitude}}"
+              iconUrl="{{colorType+shop.dsr_id.toString().slice(-1)+'.png'}}">
+
+              <!-- (mouseOver)="showInfo($event)"  (mouseOut)="hideInfo($event)"-->
+
+
+              <agm-snazzy-info-window [maxWidth]="250" >
+                <ng-template >
+                  <strong>DE Code:</strong> {{shop.de_code}}
+                  <br>
+                  <strong>DSR Code:</strong> {{shop.dsr_id}}
+                  <br>
+                  <strong>Visit Type:</strong> {{shop.survey_type}}
+                  <br>
+                  <strong>Shop Title:</strong> {{shop.shop_title}}
+                  <br>
+                  <strong>Address:</strong> {{shop.address}}
+                  <br>
+                  <a (click)="goToEvaluation(shop.survey_id, shop.survey_type)"><strong>click for view</strong><i class="fas fa-share-square"></i></a>
+
+                </ng-template>
+
+              </agm-snazzy-info-window>
+            </agm-marker>
+          </div>
+       <!-- </agm-marker-cluster>-->
+        </agm-map>
+      </section>
+
+    </section>
+  </mat-card-content>
+
+
+</mat-card>

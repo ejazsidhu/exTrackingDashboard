@@ -1,0 +1,253 @@
+<mat-card class="mb-20">
+
+  <mat-card-content>
+    <mat-card-title>
+        Distributions&nbsp;
+      <i [ngClass]="{'fa fa-cog fa-spin':loading}" color="primary"> </i>
+      <a class="title" href="http://tradetracker.com.pk/" target="_blank">
+        <img width="90" src="assets/images/tt2logo.png">
+
+    </a>
+    </mat-card-title>
+    <section class="example-section">
+      <div class="row">
+        <div class="col-md-2">
+            <mat-form-field class="example-margin mr-10-IMP">
+                <mat-select [(ngModel)]="selectedRegion" name='region' placeholder="Territory" (ngModelChange)="onRegionChange()">
+                  <mat-option *ngFor="let region of regions" [value]="region.id | orderBy:region.title">{{region.title}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            
+                <button mat-raised-button color="primary" (click)="showAddDistributionModal()" title="Add New Distribution"><i
+                  class="fas fa-plus"></i></button>
+            
+        </div>
+       
+        <!-- <div class="col-md-2">
+            <mat-form-field class="example-margin mr-10-IMP">
+                <mat-select [(ngModel)]="selectedCity" name='region' placeholder="Town" (ngModelChange)="onCityChange()">
+                  <mat-option *ngFor="let city of cities" [value]="city.id | orderBy:city.title">{{city.title}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div> -->
+      </div>
+      
+      
+
+
+
+
+    </section>
+    <!-- 
+        <div class="example-section" style="text-align: end">
+            <mat-form-field class="example-margin mr-10-IMP">
+                <mat-select name='download' placeholder="Download File" [(ngModel)]="selectedFileType" (ngModelChange)="downloadFile(selectedFileType)">
+                    <mat-option *ngFor="let file of downloadList" [value]="file">
+                        <i aria-hidden="true" class="{{file?.icon}}"></i> {{file?.title}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span>&nbsp;</span>
+           
+
+        </div> -->
+
+  </mat-card-content>
+
+
+</mat-card>
+
+
+<mat-card class="example-card mt-3">
+    
+  <mat-card-content>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Latitude</th>
+          <th scope="col">Longitude</th>
+          <th scope="col">Type</th>
+          <th scope="col">Total DE</th>
+          <th scope="col">Total DSR</th>
+          <th scope="col">Investment</th>
+          <th scope="col">Map</th>
+          <th scope="col">Edit</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of distributionList; let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{item?.title}}</td>
+          <td>{{item?.latitude}}</td>
+          <td>{{item?.longitude}}</td>
+          <td>{{item?.distribution_type}}</td>
+          <td>{{item?.total_de}}</td>
+          <td>{{item?.total_dsr}}</td>
+          <td>{{item?.investment}}</td>
+          <td>
+            <button type="button" title="Update Distribution Lat/Long Using Google Map" class="btn btn-link"
+              (click)="showChildModal(item)">
+              <i *ngIf="latLongIndex==i" class="fas fa-map-marked-alt text-success"></i>
+              <i *ngIf="latLongIndex!=i" class="fas fa-map-marked-alt"></i>
+            </button>
+          </td>
+          <td>
+            <button type="button" title="Edit Distribution" class="btn btn-link" (click)="editDistribution(item)">
+              <i class="fas fa-edit"></i>
+            </button>
+          </td>
+
+
+        </tr>
+
+      </tbody>
+    </table>
+
+  </mat-card-content>
+</mat-card>
+
+<!-- <div bsModal #staticMapModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-child-name" class="modal-title pull-left">Static Google Map</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticMapModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <img style="height: 500px; width: 100%;border:2px solid red;" src="https://maps.googleapis.com/maps/api/staticmap?
+            center={{selectedLat}},	{{selectedLong}}
+            &zoom=14
+            &size=970x500 
+            &maptype=roadmap 
+            &markers=color:red%7Clabel:D%7C{{selectedLat}},	{{selectedLong}}
+            &key=AIzaSyAKf21hro_4ZBD2OzsQ8Wk4b5VVOQV0lt8">
+      </div>
+    </div>
+  </div>
+</div> -->
+<div bsModal #googleMapModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="dialog-child-name" [config]="{backdrop: 'static',keyboard: false}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-child-name" class="modal-title pull-left" color="primary">Dynamic Google Map</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="googleMapModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="map">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="updateDistributorLocation()">Update Location</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #updateDistributionModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="dialog-child-name" [config]="{backdrop: 'static',keyboard: false}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-child-name" class="modal-title pull-left">{{title}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="updateDistributionModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="distName">Distribution Name</label>
+            <input type="email" class="form-control" id="distName" [(ngModel)]="selectedDistributionName"
+              name="selectedDistributionName">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="latitude">Latitude</label>
+            <input type="number" class="form-control" id="latitude" [(ngModel)]="selectedDistributionLat"
+              name="selectedDistributionLat">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="longitude">Longitude</label>
+            <input type="number" class="form-control" id="longitude" [(ngModel)]="selectedDistributionLong"
+              name="selectedDistributionLong">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="totalDE">Total DE</label>
+            <input type="number" class="form-control" id="totalDE" [(ngModel)]="totalDE" name="totalDE">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="totalDSR">Total DSR</label>
+            <input type="number" class="form-control" id="totalDSR" [(ngModel)]="totalDSR" name="totalDSR">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="investment">Investment</label>
+            <input type="number" class="form-control" id="investment" [(ngModel)]="investment" name="investment">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="distributionType">Distribution Type</label>
+            <select class="form-control" id="distributionType" name="distributionType"
+              [(ngModel)]="selectedDistributionType" (change)="onDistributionTypeChange()">
+              <option value="SUB">SUB</option>
+              <option value="SOLE">SOLE</option>
+            </select>
+          </div>
+          <div *ngIf="regions.length>0 || cities.length>0" class="form-group col-md-4">
+            <ng-container *ngIf="selectedDistributionType=='SOLE'">
+              <label for="regionId">Select Territory</label>
+              <select class="form-control" id="regionId" [(ngModel)]="selectedRegion" name="selectedRegion">
+                <option *ngFor="let item of regions" [value]="item.id">{{item?.title}}</option>
+              </select>
+            </ng-container>
+            <ng-container *ngIf="selectedDistributionType=='SUB'">
+              <label for="cityId">Select Town</label>
+              <select class="form-control" id="cityId" [(ngModel)]="selectedCity" name="selectedCity">
+                <option *ngFor="let item of cities" [value]="item.id">{{item?.title}}</option>
+              </select>
+            </ng-container>
+          </div>
+
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="!updateDistribution" mat-raised-button color="primary" (click)="saveDistributionData()"><i
+            class="fas fa-save"></i>&nbsp;Save</button>
+        <button *ngIf="updateDistribution" mat-raised-button color="primary" (click)="updateDistributionData()"><i
+            class="fas fa-upload"></i>&nbsp;Update</button>
+        <button mat-raised-button color="warn" (click)="updateDistributionModal.hide()"><i
+            class="fas fa-times"></i>&nbsp;Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<style>
+  #map {
+    width: 100%;
+    height: 400px;
+    background-color: grey;
+  }
+</style>

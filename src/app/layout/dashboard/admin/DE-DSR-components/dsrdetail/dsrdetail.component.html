@@ -1,0 +1,120 @@
+<mat-card>
+    <mat-card-content>
+        <table class="table">
+            <thead>
+                <tr>
+                    <!--         <th scope="col">#</th>-->
+                  <th scope="col" (click)="sortIt('region')">Region
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('region')}}
+                    </i>
+                  </th>
+                    <th scope="col" (click)="sortIt('region')">Territory
+                        <br>
+                        <i class="material-icons arrow">
+                          {{getArrowType('territory')}}
+                          </i>
+                    </th>
+                    <th scope="col" (click)="sortIt('town_name')">Town
+                        <br>
+                        <i class="material-icons arrow">
+                          {{getArrowType('town_name')}}
+                          </i>
+                    </th>
+                    <th scope="col" (click)="sortIt('DEs_name')">DE Name
+                        <br>
+                        <i class="material-icons arrow">
+                          {{getArrowType('DEs_name')}}
+                          </i>
+                    </th>
+                  <th scope="col" (click)="sortIt('de_code')">DE Code
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('de_code')}}
+                      </i>
+                  </th>
+                  <th scope="col" (click)="sortIt('employee_id')">Employee Id
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('employee_id')}}
+                    </i>
+                  </th>
+                  <th scope="col" (click)="sortIt('dsr_code')">DSR Code
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('dsr_code')}}
+                      </i>
+                </th>
+                    <th scope="col" (click)="sortIt('dsr_name')">DSR Name
+                        <br>
+                        <i class="material-icons arrow">
+                          {{getArrowType('dsr_name')}}
+                          </i>
+                    </th>
+                  <th scope="col"(click)="sortIt('dsr_type')" > Type
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('dsr_type')}}
+                    </i>
+                  </th>
+                    <th scope="col"(click)="sortIt('blocks')" > Blocks
+                        <br>
+                        <i class="material-icons arrow">
+                          {{getArrowType('blocks')}}
+                          </i>
+                    </th>
+
+                    <th (click)="sortIt('dsr_status')"> Status
+                        <br>
+                        <i class="material-icons arrow">
+                          {{getArrowType('dsr_status')}}
+                          </i>
+                    </th>
+                    <th > Transfer
+                        <br>
+                        <i class="material-icons arrow">
+                        </i>
+                      </th>
+                    <th>Action
+                        <br>
+                        <i class="material-icons arrow">
+
+                          </i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container>
+                    <tr *ngFor="let item of dsrTabledata |  orderBy: sortBy : sortOrder" >
+                      <td>{{item.region}} </td>
+                        <td>{{item.territory}} </td>
+                        <td style="width:30%; word-break: break-word ">{{item.town_name}} </td>
+                        <td>{{item.DEs_name}} </td>
+                        <td>{{item.de_code}}</td>
+                        <td>{{item.employee_id}}</td>
+                        <td>{{item.dsr_code}} </td>
+                        <td>{{item.dsr_name}} </td>
+                        <td>{{item.dsr_type}}</td>
+                      <td style="color: #3F51B5 ; cursor:pointer;" (click)="setId(item.dsr_id)">{{item.blocks}} </td>
+
+                      <td *ngIf="item.dsr_status == 'Y'">Active</td>
+                      <td *ngIf="item.dsr_status == 'N'">InActive</td>
+                      <td >
+                          <button title="Transfer Block" type="button" class="btn btn-primary" (click)="emitShop(item)">
+                              <i class="fas fa-exchange-alt"></i>
+                        </button>
+
+                      </td>
+                        <td>
+                            <button title="Edit DSR" type="button" class="btn btn-primary" (click)="emitObj(item)">
+                                    <i class="fas fa-pencil-alt"></i>
+                            </button>
+
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>

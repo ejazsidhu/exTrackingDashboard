@@ -2,3 +2,30 @@
 @import 'main';
 @import 'utils';
 @import 'responsive';
+@import '~ngx-toastr/toastr.css';
+
+mat-card-title {
+    color: #3F51B5 !important;
+}
+
+.title{
+   
+    position: absolute !important;
+    top: 0px  !important;
+    right: 0px  !important;
+
+}
+.mr-10-IMP {
+    margin-right: 1% !important;
+}
+
+.mr-5-IMP {
+    margin-right: 0.5% !important;
+}
+
+.mtb-5-IMP {
+    margin: 0.5% 1% !important;
+}
+
+
+agm-map { height: 700px; /* height is required */ }

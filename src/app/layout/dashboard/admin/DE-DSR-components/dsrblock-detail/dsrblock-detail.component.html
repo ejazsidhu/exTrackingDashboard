@@ -1,0 +1,114 @@
+<mat-card>
+    <mat-card-content>
+        <table class="table">
+            <thead>
+                <tr>
+                    <!--  <th scope="col">#</th>
+                    <th scope="col">First</th>-->
+                  <th scope="col" (click)="sortIt('region')">Region
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('region')}}
+                    </i>
+                  </th>
+                    <th scope="col" (click)="sortIt('territory')">Territory
+                      <br>
+                      <i class="material-icons arrow">
+                        {{getArrowType('territory')}}
+                        </i>
+                    </th>
+                  <th scope="col" (click)="sortIt('town_name')">Town
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('town_name')}}
+                      </i>
+                  </th>
+                    <th scope="col" (click)="sortIt('DEs_name')">DE Name
+                      <br>
+                      <i class="material-icons arrow">
+                        {{getArrowType('DEs_name')}}
+                        </i>
+                    </th>
+                  <th scope="col" (click)="sortIt('de_code')">DE Code
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('de_code')}}
+                      </i>
+                  </th>
+                  <th scope="col" (click)="sortIt('employee_id')">Employee Id
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('employee_id')}}
+                    </i>
+                  </th>
+                  <th scope="col" (click)="sortIt('dsr_id')">DSR Code
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('dsr_id')}}
+                      </i>
+                  </th>
+                  <th scope="col" (click)="sortIt('dsr_name')">DSR Name
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('dsr_name')}}
+                    </i>
+                  </th>
+                    <th scope="col" (click)="sortIt('block_id')">Block Id
+                      <br>
+                      <i class="material-icons arrow">
+                        {{getArrowType('block_id')}}
+                        </i>
+                    </th>
+                    <th scope="col" (click)="sortIt('blocks')">Block Name
+                      <br>
+                      <i class="material-icons arrow">
+                        {{getArrowType('blocks')}}
+                        </i>
+                    </th>
+                    <th scope="col" (click)="sortIt('shops')">Shops
+                      <br>
+                      <i class="material-icons arrow">
+                        {{getArrowType('shops')}}
+                        </i>
+                    </th>
+                  <th scope="col" (click)="sortIt('block_status')">Status
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('block_status')}}
+                      </i>
+                  </th>
+                      <th>Action
+                        <br>
+                        <i class="material-icons arrow">
+                            </i>
+                      </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container>
+                    <tr *ngFor="let item of dsrAreasDetailTable |  orderBy: sortBy : sortOrder">
+                        <td>{{item.region}}</td>
+                        <td>{{item.territory}}</td>
+                        <td style="width:30%; word-break: break-word ">{{item.town_name}}</td>
+                        <td>{{item.DEs_name}}</td>
+                        <td>{{item.de_code}}</td>
+                        <td>{{item.employee_id}}</td>
+                        <td>{{item.dsr_id}}</td>
+                        <td>{{item.dsr_name}}</td>
+                        <td>{{item.block_id}}</td>
+                        <td>{{item.blocks}}</td>
+                        <td style="color:#3F51B5;cursor: pointer;" (click)="emitShop(item)">{{item.shops}}</td>
+                        <td *ngIf="item.block_status == 'Y'">Active</td>
+                        <td *ngIf="item.block_status == 'N'">InActive</td>
+                        <td>
+                            <button title="edit" type="button" class="btn btn-primary" (click)="emitObj(item)">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>

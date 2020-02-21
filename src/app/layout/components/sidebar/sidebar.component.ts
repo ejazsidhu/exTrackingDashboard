@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-sidebar',
@@ -7,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
     public showMenu: string;
-    constructor() {}
+    menuList: any=[];
+    value: any=1;
+    constructor(public router: Router) {}
+    toggleValue = true;
+    toggleValueDashboard=true;
 
     ngOnInit() {
         this.showMenu = '';
+        this.menuList=JSON.parse(localStorage.getItem('menu'))
+        console.log(this.menuList,'menu List');
+    }
+
+    getIndex(i){
+        console.log(i)
+        this.value= i;
     }
 
     addExpandClass(element: any) {

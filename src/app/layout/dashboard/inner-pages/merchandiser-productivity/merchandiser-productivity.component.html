@@ -1,0 +1,271 @@
+<!-- merchandiser productivity -->
+<mat-card class="mb-20" *ngIf="router.url==='/dashboard/productivity_report'">
+
+    <mat-card-content>
+        <mat-card-title>
+            {{title| uppercase}} <i color="warn" [ngClass]="{'fa fa-cog fa-spin':loadingData}"></i>
+            <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is being prepared for download</small>
+            <a class="title" href="http://tradetracker.com.pk/" target="_blank">
+              <img width="90" src="assets/images/tt2logo.png">
+
+          </a>
+          </mat-card-title>
+
+        <section class="example-section">
+
+
+          <!--  <mat-form-field class="example-margin mr-10-IMP">
+
+                <mat-select placeholder="Zone" name='zone' [(ngModel)]="selectedZone" (ngModelChange)="zoneChange()">
+                    <mat-option [value]="zone" *ngFor="let zone of zones">{{zone.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="regions.length>0 && selectedZone.id !==-1" class="example-margin mr-10-IMP">
+                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion" (ngModelChange)="regionChange()">
+                    <mat-option [value]="region" *ngFor="let region of regions">{{region.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="cities.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="City" name='city' [(ngModel)]="selectedCity" (ngModelChange)="getTabsData()">
+                    <mat-option [value]="city" *ngFor="let city of cities">{{city.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="distributionList.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="Distribution List" name='distributionList' [(ngModel)]="selectedDistribution" (ngModelChange)="getTabsData()">
+                    <mat-option [value]="dist" *ngFor="let dist of distributionList">{{dist.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="storeType.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="Store Type" name='storeType' [(ngModel)]="selectedStoreType" (ngModelChange)="getTabsData()">
+                    <mat-option [value]="store" *ngFor="let store of storeType">{{store}}</mat-option>
+                </mat-select>
+            </mat-form-field>-->
+
+            <!-- <mat-form-field *ngIf="impactTypeList.length>0" class="example-margin mr-10-IMP">
+              <mat-select placeholder="Remove Impact" name='removeImpact' [(ngModel)]="selectedImpactType">
+                  <mat-option [value]="impact.key" *ngFor="let impact of impactTypeList">{{impact.value}}</mat-option>
+              </mat-select>
+          </mat-form-field> -->
+
+            <mat-form-field class="example-full-width mr-5-IMP">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate"  placeholder="Choose a start date" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+                <mat-datepicker #picker0></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="example-full-width mr-5-IMP">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate"  placeholder="Choose a end date" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+          <mat-form-field class="example-margin mr-5-IMP" *ngIf="isAdmin">
+            <mat-select placeholder="Selected Region" name='Region' [(ngModel)]="selectedZone.id" (ngModelChange)="getRegionsByZoneId()" >
+              <mat-option [value]="zone.id" *ngFor="let zone of zones">{{zone.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-margin mr-5-IMP">
+            <mat-select placeholder="Selected Territory" name='Territory'  [(ngModel)]="selectedRegion.id" (ngModelChange)="onRegionChange(this.selectedRegion.id)" >
+              <mat-option [value]="region.id" *ngFor="let region of regions">{{region.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-margin mr-5-IMP">
+            <mat-select placeholder="Selected Town" name='Town' [(ngModel)]="this.selectedCity.id" >
+              <mat-option [value]="city.id" *ngFor="let city of cities">{{city.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-margin mr-5-IMP">
+            <mat-select placeholder="Evaluated Shops" name='Town' [(ngModel)]="this.nonEvaluated" >
+              <mat-option [value]="option.value" *ngFor="let option of evaluationMenuList">{{option.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </section>
+        
+        <!-- <section class="example-section"> -->
+          <button class="mr-5-IMP" mat-raised-button color="warn" (click)="getTabsData()">Submit</button>
+          <button class="mr-5-IMP" mat-raised-button color="primary" (click)="resetFilters()">Reset Filters</button>
+
+        <!-- </section> -->
+
+
+
+
+    </mat-card-content>
+</mat-card>
+
+
+<!-- <div *ngIf="loading && router.url==='/dashboard/productivity_report'" class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
+  <div fxFlex class="img-center">
+      <img src="assets/images/basicloader.gif" alt="" srcset="">
+  </div>
+</div> -->
+
+
+<!-- <mat-form-field class="mat-form-field1" *ngIf="router.url==='/dashboard/productivity_report'">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field> -->
+
+<!-- <app-mat-table [tableData]="tableData"></app-mat-table> -->
+
+<mat-card *ngIf="tableData.length>0 && router.url==='/dashboard/productivity_report'">
+    <mat-card-content>
+
+        <table class="table animated slideInLeft">
+            <thead>
+                <tr>
+
+                    <th scope="col" (click)="sortIt('merchandiser_code')">D.E Code
+                        <br>
+                        <i class="material-icons arrow">
+                          {{getArrowType('merchandiser_code')}}
+                          </i>
+
+                    </th>
+                    <th scope="col" (click)="sortIt('merchandiser_name')">D.E Name
+                        <br>
+                        <i class="material-icons arrow">
+                          {{getArrowType('merchandiser_name')}}
+                          </i>
+                    </th>
+                  <th scope="col" (click)="sortIt('employee_id')">Employee Id
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('employee_id')}}
+                    </i>
+                  </th>
+                    <th scope="col" (click)="sortIt('added')">Shops Added
+                        <br>
+                        <i class="material-icons arrow">
+                          {{getArrowType('added')}}
+                          </i>
+                    </th>
+                     <th scope="col" (click)="sortIt('ww')">Work With
+                       <br>
+                       <i class="material-icons arrow">
+                         {{getArrowType('ww')}}
+                         </i>
+                   </th>
+                   <th scope="col" (click)="sortIt('wr')">Work Review
+                       <br>
+                       <i class="material-icons arrow">
+                         {{getArrowType('wr')}}
+                         </i>
+                   </th>
+                  <th scope="col" (click)="sortIt('town_storming')">Town Storming
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('town_storming')}}
+                    </i>
+                  </th>
+                  <th scope="col" (click)="sortIt('total_audio')">Total Audio
+                    <br>
+                    <i class="material-icons arrow">
+                      {{getArrowType('total_audio')}}
+                    </i>
+                  </th>
+
+
+
+                   <!-- <th scope="col" (click)="sortIt('unvisited')" style="background:#F12E2B;color: white">Work With
+                        <br>
+                        <i class="material-icons arrow" style="color:white !important">
+                          {{getArrowType('unvisited')}}
+                          </i></th>
+                    <th scope="col" (click)="sortIt('completed_percent')">Work Review <strong>%</strong>
+                        <br>
+                        <i class="material-icons arrow">
+                          {{getArrowType('completed_percent')}}
+                          </i></th>
+                    <th scope="col" (click)="sortIt('successful_percent')">Successful <strong>%</strong>
+                        <br>
+                        <i class="material-icons arrow">
+                          {{getArrowType('successful_percent')}}
+                          </i></th>-->
+
+
+
+                </tr>
+            </thead>
+            <tbody *ngIf="tableData.length > 0">
+                <ng-container *ngFor="let item of tableData |  orderBy: sortBy : sortOrder">
+                    <tr>
+                        <td scope="row">{{item.merchandiser_code}}</td>
+                        <td>
+                            {{item.merchandiser_name}}
+                        </td>
+                      <td>
+                        {{item.employee_id}}
+                      </td>
+                        <td *ngIf="item.added==0">
+                          {{item.added}}
+                        </td>
+                        <td class="a-link" *ngIf="item.added!=0" title="added">
+                            <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail',item.id]" [queryParams]="{'id':item.id,'remark_id':-1}" queryParamsHandling="merge">{{item.added}}</a>
+
+                        </td>
+                        <!--<td *ngIf="item.visited==0">
+                            {{item.visited}}
+
+                        </td>-->
+                       <!-- <td class="a-link" *ngIf="item.visited!=0" title="visited">
+                          &lt;!&ndash;  <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail_visit',item.id]" [queryParams]="{'id':item.id,'remark_id':-1,'visitType':'ww'}" queryParamsHandling="merge"> {{item.visited}}</a>&ndash;&gt;
+                          {{item.visited}}
+                        </td>-->
+                        <td *ngIf="item.ww==0">
+                            {{item.ww}}
+
+                        </td>
+                        <td class="a-link" *ngIf="item.ww!=0" title="work_view">
+                            <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail_visit',item.id]" [queryParams]="{'id':item.id,'remark_id':0,'visitType':'ww' , 'evaluated': this.nonEvaluated}" queryParamsHandling="merge"> {{item.ww}}</a>
+
+                        </td>
+                        <td *ngIf="item.wr==0">
+                            {{item.wr}}
+                        </td>
+                      <td class="a-link" *ngIf="item.wr!=0" title="work_review">
+                        <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail_visit',item.id]" [queryParams]="{'id':item.id,'remark_id':1,'visitType':'wr' , 'evaluated': this.nonEvaluated}" queryParamsHandling="merge"> {{item.wr}}</a>
+
+                      </td>
+
+                      <td *ngIf="item.town_storming==0" >
+                        {{item.town_storming}}
+                      </td>
+                      <td class="a-link" *ngIf="item.town_storming!=0" title="town_storming">
+                        <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail_town_storming',item.id]" [queryParams]="{'id':item.id,'remark_id':2,'visitType':'town_storming'}" queryParamsHandling="merge"> {{item.town_storming}}</a>
+
+                      </td>
+                      <td>
+                        {{item.total_audio}}
+                      </td>
+
+
+                       <!-- <td>{{item.unvisited}}</td>
+                        <td>{{getPercentage(item.completed_percent)}}</td>
+                        <td>{{getPercentage(item.successful_percent)}}</td>-->
+
+                    </tr>
+                </ng-container>
+
+
+
+            </tbody>
+        </table>
+
+    </mat-card-content>
+</mat-card>
+
+<div class="row " *ngIf="loading && router.url==='/dashboard/productivity_report'">
+    <div class="col-md-12 text-center">
+       <!-- <div class="img-center">
+            <img src="assets/images/basicloader.gif" alt="" srcset="">
+        </div>-->
+    </div>
+</div>
+
+
+<!-- / merchandiser productivity -->

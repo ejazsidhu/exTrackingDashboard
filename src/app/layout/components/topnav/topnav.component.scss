@@ -6,10 +6,18 @@
     top: 0;
     z-index: 1000;
 }
+
 .nav-brand {
     width: 215px;
     text-align: center;
 }
+
+.title-image {
+    background: white;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
 .topnav-icon {
     text-decoration: none;
     display: flex;
@@ -23,14 +31,17 @@
 .visible-md {
     display: none;
 }
+
 .visible-sm {
     display: none;
 }
+
 @media screen and (max-width: 992px) {
     .visible-md {
         display: block;
     }
 }
+
 @media screen and (max-width: 768px) {
     .visible-sm {
         display: block;
@@ -39,8 +50,12 @@
         width: 100%;
     }
 }
+
 @media screen and (max-width: 768px) {
     .hidden-sm {
         display: none;
     }
+}
+.user-name{
+  font-size: 15px;
 }

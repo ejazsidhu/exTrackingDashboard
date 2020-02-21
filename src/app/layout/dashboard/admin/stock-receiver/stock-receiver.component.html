@@ -1,0 +1,130 @@
+<mat-card class="mb-20">
+
+
+  <mat-card-content>
+    <mat-card-title>
+      <h3>Stock Receive</h3>
+      <a class="title" href="http://tradetracker.com.pk/" target="_blank">
+        <img width="90" src="assets/images/tt2logo.png">
+
+    </a>
+    </mat-card-title>
+    <br>
+    <br>
+    <section class="example-section">
+
+      <!--<form (ngSubmit)="onSubmit()" #stockTransferModel="ngForm">-->
+      <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+ <!--     <form>-->
+        <section class="example-section">
+          <!--            <mat-form-field class="example-full-width mr-5-IMP">
+                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" formControlName="transferDate" placeholder="Select Date" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+                        <mat-datepicker #picker0></mat-datepicker>
+                      </mat-form-field>-->
+
+          <mat-form-field class="example-margin mtb-5-IMP">
+            <mat-select placeholder="Transit Code" name='Transit Code' formControlName="transferCode" >
+              <mat-option [value]="type.transferCode" *ngFor="let type of transitCodes" (click)="newOnChange()" >{{type.transferCode}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!--<mat-form-field class="example-margin mtb-5-IMP">
+            <mat-select placeholder="Stock Sender Name" name='StockSender Name' formControlName="fromTransfer" >
+              <mat-option [value]="type.id" *ngFor="let type of sender" >{{type.title || type.town_name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-margin mtb-5-IMP">
+            <mat-select placeholder="Transfer Codes" name='Transfer Codes' formControlName="transferCode" >
+              <mat-option [value]="type.transferCodes" *ngFor="let type of transferCodes">{{type.transferCodes}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+            &lt;!&ndash;  <mat-select placeholder="Stock Receiver" name='Stock Receiver' formControlName="toTransfer" >
+                <mat-option [value]="type.id" *ngFor="let type of receiver">{{type.title || type.town_name }}</mat-option>
+              </mat-select>&ndash;&gt;
+
+         <mat-form-field class="example-margin mtb-5-IMP" >
+           <input matInput readonly formControlName="toTransfer"  placeholder="Stock Receiver Name"  name="Stock Receiver Name" value="{{receiver_title || town_name}}">
+          </mat-form-field>-->
+
+          <!--<mat-form-field class="example-margin example-full-width mr-10-IMP" >
+            <input matInput formControlName="transferCode"  placeholder="Transfer Code"  name="transfer-code">
+          </mat-form-field>-->
+          <mat-form-field class="example-margin mr-5-IMP">
+                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" formControlName="receivedDate" placeholder="Receive Date" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+                        <mat-datepicker #picker0></mat-datepicker>
+                      </mat-form-field>
+
+    <!--      <mat-form-field class="example-margin  mtb-5-IMP" >
+            <input matInput readonly formControlName="transferDate"  placeholder="Transfer Date"  name="transfer-date" >
+          </mat-form-field>-->
+
+
+          <mat-form-field class="example-margin  mtb-5-IMP" >
+          <input matInput readonly formControlName="transferType"  placeholder="Transfer Type"  name="transfer-type">
+          </mat-form-field>
+
+          <mat-form-field class="example-margin  mtb-5-IMP" >
+            <input matInput readonly   placeholder="Stock sender"  name="stock-sender" formControlName="fromTransfer">
+          </mat-form-field>
+
+          <mat-form-field class="example-margin  mtb-5-IMP" >
+            <input matInput readonly   placeholder="Stock receiver"  name="stock-receiver" formControlName="toTransfer">
+          </mat-form-field>
+
+
+        </section>
+
+
+        <br>
+        <h5>Received Stock</h5>
+          <table class="table" >
+            <thead>
+            <tr>
+              <th scope="col">Brand Name</th>
+              <th scope="col">Transferred Stock Quantity</th>
+              <th scope="col" *ngIf="isStockRendering">Received Stock Quantity</th>
+            </tr>
+            </thead>
+            <tbody formArrayName="transferStock"  *ngIf="availableStock.length > 0">
+            <tr  *ngFor="let stock of form.get('transferStock')['controls']; let i = index;" [formGroupName]="i" >
+              <td><mat-form-field class="example-margin  mtb-5-IMP" >
+                <input matInput readonly formControlName="brandName"    name="Brand-Name">
+              </mat-form-field></td>
+              <td>
+                <mat-form-field class="example-margin  mtb-5-IMP" >
+                  <input matInput readonly formControlName="stock"   name="Available-Stock">
+                </mat-form-field>
+              </td>
+              <td *ngIf="isStockRendering">
+                <mat-form-field class="example-margin  mtb-5-IMP" >
+                  <input matInput type="number"  formControlName="receiveQty"   name="Transfer-Quantity">
+                </mat-form-field>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+    <span *ngIf="error" class="span-color" > You can not received stock more than available stock..!</span>
+        <span *ngIf="negativeAmountError" class="span-color" >You can not receive stock in negative figure..!</span>
+        <br>
+        <section class="example-section">
+          <button [disabled]="error || form.invalid || negativeAmountError || !availableStock.length > 0" mat-raised-button color="warn" type="submit">Receive</button>
+        </section>
+        <!--<section class="example-section">
+          <button [disabled]="error || !form.invalid" mat-raised-button color="warn" type="submit">Submit</button>
+        </section>-->
+      </form>
+
+    </section>
+
+
+
+  </mat-card-content>
+
+
+</mat-card>

@@ -1,0 +1,44 @@
+<mat-card class="mb-20">
+
+    <mat-card-content>
+        <mat-card-title>
+            {{title}}
+            <i color="primary" [ngClass]="{'fa fa-cog fa-spin':loading  }"> </i>
+            <a class="title" href="http://tradetracker.com.pk/" target="_blank">
+                <img width="90" src="assets/images/tt2logo.png">
+
+            </a>
+
+        </mat-card-title>
+
+
+    </mat-card-content>
+
+
+</mat-card>
+<mat-card>
+    <mat-card-content>
+        <table class="table">
+            <thead>
+                <tr>
+           <!--         <th scope="col">#</th>-->
+                    <th scope="col">Distribution Name</th>
+                    <th scope="col">Surveyor name</th>
+                  <th scope="col">Latitude</th>
+                  <th scope="col">Longitude</th>
+                </tr>
+            </thead>
+            <tbody>
+            <ng-container  >
+                <tr *ngFor="let item of dsrTabledata">
+                  <td>{{item.dsrs_name}} </td>
+                 <!-- <td style="color: #ed6359 ; cursor:pointer;" >{{item.dsr_code || "Dsr Code not available"}}</td>-->
+                    <td style="color: #3F51B5 ; cursor:pointer;" [routerLink]="['/dashboard/admin/DSR_Block_Detail']" routerLinkActive="router-link-active"
+                        [queryParams]="{'dsrId':item.dsr_id}" >{{item.dsr_areas}}</td>
+
+                </tr>
+            </ng-container>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>

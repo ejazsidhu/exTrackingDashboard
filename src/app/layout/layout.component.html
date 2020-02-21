@@ -1,6 +1,18 @@
 <!-- <app-nav></app-nav> -->
+
+
 <app-topnav></app-topnav>
-<app-sidebar></app-sidebar>
-<div class="main-container">
-    <router-outlet></router-outlet>
-</div>
+<ng-container *ngIf="!hideSideBar">
+    <app-sidebar></app-sidebar>
+    <div class="main-container">
+
+        <router-outlet></router-outlet>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="hideSideBar">
+    <div class="container-fluid mt-6">
+
+        <router-outlet></router-outlet>
+    </div>
+</ng-container>

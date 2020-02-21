@@ -1,0 +1,216 @@
+<!-- <section-one-view></section-one-view>
+<section-two-view></section-two-view>
+<section-three-view></section-three-view> -->
+
+<div class="mt-5">
+    <div class="row">
+        <div class="col-md-12" style="margin:20% 40%" *ngIf="!data.section">
+            <img src="assets/images/basicloader.gif" alt="" srcset="">
+        </div>
+    </div>
+
+    <div class="row animated slideInLeft mt-3" *ngIf="data?.section">
+        <div id="style-2" class="col-md" style="overflow-y:scroll !important;overflow-x:hidden !important;height:90vh ;width:100% !important">
+            <div class="row justify-content-center">
+                <ng-container *ngFor="let sec of data?.section">
+                    <ng-container *ngIf="sec?.imageViewType===1">
+                        <section-one-view class="width-100" [data]="sec" (showModal)="showChildModal($event)">
+                        </section-one-view>
+
+
+                    </ng-container>
+
+                    <hr>
+                    <ng-container *ngIf="sec?.imageViewType===2">
+                        <section-two-view class="width-100" [data]="sec" (showModal)="showChildModal($event)">
+                        </section-two-view>
+
+                    </ng-container>
+                    <hr>
+                    <ng-container *ngIf="sec?.imageViewType===5">
+
+                        <section-five-view class="width-100  mt-3" [data]="sec">
+                        </section-five-view>
+                    </ng-container>
+                    <hr>
+                    <!-- [productList]="productList" [isEditable]="isEditable" (productList)="calculateMSLAgain($event)" -->
+                    <ng-container *ngIf="sec?.imageViewType===3">
+                        <!-- (productList)="calculateMSLAgain($event)" -->
+                        <section-three-view class="width-100" [data]="sec" (showModal)="showChildModal($event)">
+                        </section-three-view>
+                    </ng-container>
+
+                    <ng-container *ngIf="sec?.imageViewType===4">
+                        <!-- (productList)="calculateMSLAgain($event)" -->
+                        <section-four class="width-100" [data]="sec">
+                        </section-four>
+                    </ng-container>
+                </ng-container>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3" *ngIf="data?.criteria && isFromShop">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered sm-table table-hover" style="line-height:1">
+                            <thead class="thead-light">
+                                <tr style="text-align: center; ">
+                                    <th>Title</th>
+                                    <th>Score</th>
+                                    <th>Achieved</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let item of cloneArray;let i=index" style="  text-align: center; ">
+                                    <td>
+                                        <label class="container" style="margin-bottom: 8px;">
+                                            <p style="padding-top: 5px; margin-bottom: 5px; padding-left:5px;">{{item?.title}}</p>
+
+                                            <input class="checkbox" type="checkbox"
+                                                name="{{item?.title}}" [checked]=item?.isChecked id="{{item?.id}}"
+                                                (click)="counter(checked,item,i);" #checked>
+                                            <span class="checkmark"></span>
+
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="container" for="score" style="margin-top:5px;margin-bottom:2px;">
+                                            {{item?.score}}
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="container" for="achievedScore" style="margin-top:5px;margin-bottom:2px;">
+                                            {{item?.achievedScore}}
+                                        </label>
+                                    </td>
+                                </tr>
+                                <!-- <hr> -->
+                                <tr style="text-align: center; ">
+                                    <td>
+                                        <label for="">Total Score:</label>
+
+                                    </td>
+                                    <td>
+                                        <label for="score">
+                                            {{score}}
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label for="totalAchieveScore">
+                                            {{totalAchieveScore}}
+                                        </label>
+
+                                    </td>
+                                </tr>
+                                <!-- <hr> -->
+                            </tbody>
+
+                        </table>
+
+
+
+
+                        <div class="row" *ngIf="data.shopStatus=='N'">
+                            <div class="col-md-12" style="text-align: end; padding: 0 20px 5px 0; ">
+                                <button [disabled]="loading" class="btn btn-primary" (click)="evaluateShop()">
+                                    <i [ngClass]="{'fa fa-spinner fa-spin': loading}"></i>
+                                    Evaluate</button>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="data.shopStatus=='Y'">
+                            <div class="col-md-12" style="text-align: end; padding: 0 20px 5px 0; ">
+                                <button [disabled]="loading" class="btn btn-primary" (click)="evaluateShop()">
+                                    <i [ngClass]="{'fa fa-spinner fa-spin': loading}"></i>
+                                    Re-Evaluate</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- <div class="row justify-content-center">
+                    <ng-container class="mt-5 justify-content-center " *ngIf="data?.shopDetails?.tagsList ">
+                        <div class="col-md-11 mt-5 ">
+                            <table class="table table-bordered ">
+                                <tr *ngFor="let tab of data?.shopDetails?.tagsList;let j=index ">
+                                    <th style="width:50%;background: lightgray; ">{{tab?.heading}}</th>
+                                    <td style="width:50%;word-break: break-word ">{{tab?.value}}</td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </ng-container>
+                </div> -->
+            </div>
+        </div>
+       
+
+    </div>
+
+</div>
+
+
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" (click)="rotateImage()" style="cursor:pointer" title="click to rotate Image" [ngClass]="{'rotated-image-0': rotationDegree==0, 'rotated-image-90': rotationDegree==90, 'rotated-image-180': rotationDegree==180, 'rotated-image-270': rotationDegree==270, 'rotated-image-360': rotationDegree==360}">
+
+            <div class="modal-body" style="padding:10px">
+                <img width=100% src="{{ip}}{{selectedShop.url}}" alt="" srcset="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- remarks modal -->
+<div bsModal #remarksModal="bs-modal" [config]="{backdrop: 'static',keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-body" style="padding:10px">
+                <label id="example-radio-group-label">Pick your remarks for ({{selectedCriteria?.title}})</label>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Remark</th>
+                            <th>Score</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let remark of remarksList;let i=index">
+                            <!-- <section class="example-section"> -->
+                            <tr *ngIf="remark.criteriaId==selectedCriteria.id">
+                                <!-- id="{{selectedCriteria.id}}" name="{{selectedCriteria.title}}" -->
+                                <td>
+                                    <mat-checkbox #checkStatus value="false" class="example-margin" name="{{selectedCriteria.title}}" (click)="remarksCounter(remark,checkStatus,selectedCriteria);">
+                                        {{remark.description}}
+                                    </mat-checkbox>
+                                </td>
+                                <td>
+                                    {{remark?.score}}
+                                </td>
+                            </tr>
+
+                            <!-- </section> -->
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="col-md" style="text-align: end; padding: 0 20px 5px 0; ">
+
+                    <!-- <button class="btn btn-primary btn-sm" (click)="hideRemarksModal()">Submit</button> -->
+                    <button class="btn btn-danger ml-2 btn-sm" (click)="hideRemarksModal()">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

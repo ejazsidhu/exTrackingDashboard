@@ -1,0 +1,293 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>
+      {{title| uppercase}} <i color="warn" [ngClass]="{'fa fa-cog fa-spin':loadingData}"></i>
+      <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Updating
+        Repords...</small>
+        <a class="title" href="http://tradetracker.com.pk/" target="_blank">
+          <img width="90" src="assets/images/tt2logo.png">
+
+      </a>
+    </mat-card-title>
+
+    <section class="example-section">
+
+      <mat-form-field class="example-full-width mr-5-IMP">
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate"
+          placeholder="Choose a start date" readonly (ngModelChange)="getTabsData($event,'start')">
+        <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+        <mat-datepicker #picker0></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width mr-5-IMP">
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate"
+          placeholder="Choose a end date" readonly (ngModelChange)="getTabsData($event,'end')">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="example-margin mr-5-IMP">
+        <mat-select placeholder="Selected Region" name='Region' [(ngModel)]="selectedZone.id"
+          (ngModelChange)="getTabsData($event,'zone')">
+
+          <mat-option [value]="zone.id" *ngFor="let zone of zones">{{zone.title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-margin mr-5-IMP">
+        <mat-select placeholder="Selected Territory" name='Territory' [(ngModel)]="selectedRegion.id"
+          (ngModelChange)="getTabsData($event,'territory')">
+
+          <mat-option [value]="region.id" *ngFor="let region of regions">{{region.title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-margin mr-5-IMP">
+        <mat-select placeholder="Selected DE" name='DE' [(ngModel)]="selectedSurveyorId"
+                    (ngModelChange)="getTabsData($event,'de')">
+
+          <mat-option [value]="De.id" *ngFor="let De of DeList">{{De.fullName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-margin mr-5-IMP">
+        <mat-select placeholder="Selected DSR" name='DSR' [(ngModel)]="selectedDSR"
+          (ngModelChange)="getTabsData($event,'dsr')">
+
+          <mat-option [value]="dsr.dsr_id" *ngFor="let dsr of dsrList">{{dsr.dsr_name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+        
+
+    </section>
+    <section>
+      <button mat-raised-button color="primary" class="reset-button" (click)="resetFilters()">Reset Filters</button>
+
+      <button mat-raised-button color="primary" title="Add Sale Target" (click)="showAddSaleTargetModal()"><i class="fas fa-plus"></i></button>
+    </section>
+
+
+
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="mt-5">
+  <mat-card-content>
+
+    <table class="table animated slideInLeft">
+      <thead>
+        <tr>
+
+          <th scope="col" (click)="sortIt('de_code')">DE Code
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('de_code')}}
+            </i>
+
+          </th>
+          <th scope="col" (click)="sortIt('de_name')">DE Name
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('de_name')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('dsr_name')">DSR Name
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('dsr_name')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('visit_date')">Visit Date
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('visit_date')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('family')">Family
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('family')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('retailValue')">Retail Value
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('retailValue')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('wholeSaleValue')">Whole Sale Value
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('wholeSaleValue')}}
+            </i>
+          </th>
+          <th scope="col">Edit
+            <br>
+            <i class="material-icons arrow">
+
+            </i>
+          </th>
+
+        </tr>
+      </thead>
+      <tbody *ngIf="tableData.length > 0">
+        <ng-container *ngFor="let item of tableData |  orderBy: sortBy : sortOrder">
+          <tr>
+            <td scope="row">{{item.de_code}}</td>
+            <td>
+              {{item.de_name}}
+            </td>
+
+            <td>
+              {{item.dsr_name}}
+            </td>
+
+            <td>
+              {{item.visit_date}}
+
+            </td>
+            <td>
+              {{item.family}}
+
+            </td>
+            <td>
+              {{item.retailValue}}
+            </td>
+            <td>
+              {{item.wholeSaleValue}}
+
+            </td>
+
+            <td>
+              <button title="edit" type="button" class="btn btn-primary" (click)="openDsrSaleModal(item)">
+                <i class="fas fa-pencil-alt"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+
+
+
+      </tbody>
+    </table>
+
+
+  </mat-card-content>
+</mat-card>
+
+<div bsModal #updateSales="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name"
+  [config]="{backdrop: 'static',keyboard: false}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-child-name" class="modal-title pull-left">Edit Sales</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideUpdateSalesModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Retail Value" [(ngModel)]="retailValue" type="number">
+            </mat-form-field>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Whole Sale Value" [(ngModel)]="wholeSaleValue" type="number">
+            </mat-form-field>
+
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button mat-raised-button color="primary" (click)="updateDsrSale()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #addSaleTarget="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name"
+  [config]="{backdrop: 'static',keyboard: false}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-child-name" class="modal-title pull-left">Add Sales</h4>
+
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideAddSaleTargetModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="text" class="form-control" id="date" name="date" bsDatepicker
+                  readonly [bsValue]="bsValue" [(ngModel)]="date"
+                  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-blue'}">
+          </div>
+          </div>
+            <div class="col-md-12">
+                <label for="select" style="
+                color: #a5a2a2;
+                font-size: 12px;
+            "> DE:*</label> <br>
+                <select [(ngModel)]="selectedDENew" class="form-control" class="select-text" (ngModelChange)="getDSRListByDE()"
+                required>
+                <option [value]="item.id" *ngFor="let item of DeList">{{item.fullName}}</option>
+                </select>
+            </div>
+            <div class="col-md-12">
+              <label for="select" style="
+              color: #a5a2a2;
+              font-size: 12px;
+          "> DSR :*</label> <br>
+              <select [(ngModel)]="selectedDSRNew" class="form-control" class="select-text" required>
+                <option [value]="-1" selected></option>
+              <option [value]="dsr.dsr_id" *ngFor="let dsr of dsrList">{{dsr.dsr_name +' - '+ dsr.dsr_id}}</option>
+              </select>
+          </div>
+          <div class="col-md-12">
+            <label for="select" style="
+            color: #a5a2a2;
+            font-size: 12px;
+        "> Family :*</label> <br>
+            <select [(ngModel)]="selectedFamily" class="form-control" class="select-text" required>
+              <option [value]="-1" selected></option>
+            <option [value]="family.familyId" *ngFor="let family of familyList">{{family.brandName}}</option>
+            </select>
+        </div>
+
+          <div class="col-md-12 mt-3">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Retail Value" [(ngModel)]="retailValueNew" type="number" required>
+            </mat-form-field>
+
+          </div>
+
+          <div class="col-md-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Whole Sale Value" [(ngModel)]="wholeSaleValueNew" type="number" required>
+            </mat-form-field>
+
+          </div>
+          <div class="col-md-12 mt-3">
+            <small id="emailHelp" class="text-muted">Field with * required</small>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button mat-raised-button color="primary" (click)="saveDsrSale()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

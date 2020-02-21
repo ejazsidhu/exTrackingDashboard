@@ -9,17 +9,22 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class TopnavComponent implements OnInit {
     public pushRightClass: string;
+    userName: string;
+    panelOpenState = false;
 
     constructor(public router: Router, private translate: TranslateService) {
-        this.router.events.subscribe(val => {
+       /* this.router.events.subscribe(val => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
             }
         });
+        this.userName=localStorage.getItem('user_name');*/
+
     }
 
     ngOnInit() {
         this.pushRightClass = 'push-right';
+        this.userName = localStorage.getItem('username');
     }
 
     isToggled(): boolean {
@@ -33,7 +38,10 @@ export class TopnavComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+       // localStorage.removeItem('isLoggedin');
+       // localStorage.removeItem('user_id');
+       // localStorage.removeItem('regionId');
+        localStorage.clear();
         this.router.navigate(['/login']);
     }
 

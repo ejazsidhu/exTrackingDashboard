@@ -1,0 +1,59 @@
+<mat-card>
+    <mat-card-content>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">
+                         <mat-checkbox color="primary"  (change)="checkUncheckAll($event)"></mat-checkbox>
+                    </th>
+                    <!-- <th></th> -->
+                    <th scope="col">Territory</th>
+                    <th scope="col">Town</th>
+                    <th scope="col">DE Name</th>
+                    <th scope="col">DE Code</th>
+                    <th scope="col">DSR Code</th>
+                    <th scope="col">DSR Name</th>
+                    <th scope="col">Block Name</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container>
+                    <tr *ngFor="let item of getBlockWiseShops;let i=index">
+                        <td>
+                            <!-- [(ngModel)]="item.isSelected" [checked]=!item?.isSelected -->
+                            <!-- {{item?.isSelected}} -->
+                            <mat-checkbox color="primary" type="checkbox" name="{{item?.shop_title}}" id="{{item?.shop_id}}" (click)="counter(checked,item,i)" #checked></mat-checkbox>
+
+                        </td>
+                        <!-- <th>{{i+1}}</th> -->
+                        <td>{{item.region}}</td>
+                        <td>{{item.town_name}}</td>
+                        <td>{{item.DEs_name}}</td>
+                        <td>{{item.de_code}}</td>
+                        <td>{{item.dsr_id}}</td>
+                        <td>{{item.dsr_name}}</td>
+                        <td>{{item.blocks}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>
+<div class="form-group row mt-3">
+    <label for="exampleFormControlSelect1" class="col-md-2 col-form-label">Select DSR</label>
+    <div class="col-md-8">
+        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="selectedBlock">
+            <ng-container *ngFor="let item of dsrList | orderBy:'Dsrs'">
+                <option *ngIf="selectedRegion==item.region_id" [value]="item?.dsr_id" >{{item?.dsr_name +" - " +item?.dsr_id}}
+                </option>
+            </ng-container>
+
+
+
+          </select>
+    </div>
+    <div class="col-md-2">
+        <button   mat-raised-button color="primary" (click)="emitValue()">Transfer</button>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<mat-card class="mb-20">
+
+
+  <mat-card-content>
+    <mat-card-title>
+      <h3>Stock Transfer</h3>
+      <a class="title" href="http://tradetracker.com.pk/" target="_blank">
+        <img width="90" src="assets/images/tt2logo.png">
+
+    </a>
+    </mat-card-title>
+    <br>
+    <br>
+        <section class="example-section">
+
+          <!--<form (ngSubmit)="onSubmit()" #stockTransferModel="ngForm">-->
+          <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <section class="example-section">
+            <mat-form-field class="example-margin mr-5-IMP">
+              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" formControlName="transferDate" placeholder="Select Date" readonly>
+              <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+              <mat-datepicker #picker0></mat-datepicker>
+            </mat-form-field>
+
+              <mat-form-field class="example-margin mr-5-IMP">
+                <mat-select placeholder="Transfer Type" name='transferType'  formControlName="transferType">
+                  <mat-option [value]="type" *ngFor="let type of transferType" (click)="onChanges()">{{type}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="example-margin mr-5-IMP">
+                <mat-select placeholder="Stock Sender" name='Sender' formControlName="fromTransfer" >
+                  <mat-option [value]="type.id" *ngFor="let type of sender" >{{type.title || type.title}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="example-margin mr-5-IMP" *ngIf="receiverTerritory">
+                <mat-select placeholder="Receiver territory" name='Receiver Territory'  formControlName="receiverTerritory">
+                  <mat-option [value]="type.id" *ngFor="let type of receiverTerritories">{{type.title || type.title }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="example-margin mr-5-IMP">
+                <mat-select placeholder="Stock Receiver" name='Stock Receiver' formControlName="toTransfer" >
+                  <mat-option [value]="type.id" *ngFor="let type of receiver">{{type.title || type.title }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+         <!--       <mat-form-field class="example-margin example-full-width mr-10-IMP" >
+                  <input matInput formControlName="transferCode"  placeholder="Transfer Code"  name="transfer-code">
+                </mat-form-field>
+              <span class="valid-transfercode-span" *ngIf="validTransferCode">Valid Transfer Code</span>
+              <span class="invalid-transfercode-span" *ngIf="inValidTransferCode">Invalid Transfer Code</span>-->
+            </section>
+
+
+            <br>
+            <h5>Available Stock</h5>
+            <div >
+              <table class="table"  >
+                <thead>
+                <tr>
+                  <th scope="col">Brand Name</th>
+                  <th scope="col">Available Stock Quantity</th>
+                  <th scope="col">Send Stock Quantity</th>
+                </tr>
+                </thead>
+                <tbody formArrayName="transferStock"  *ngIf="availableStock.length > 0" >
+                <tr   *ngFor="let stock of form.get('transferStock')['controls']; let i = index;" [formGroupName]="i" >
+
+                    <td >
+                      <mat-form-field class="example-margin  mr-5-IMP" >
+                      <input matInput readonly formControlName="brandName"    name="Brand-Name">
+                    </mat-form-field></td>
+                    <td>
+                      <mat-form-field class="example-margin  mr-5-IMP" >
+                        <input matInput readonly formControlName="stock"   name="Available-Stock">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field class="example-margin  mr-5-IMP" >
+                        <input matInput type="number"  formControlName="receiveQty"   name="Transfer-Quantity">
+                      </mat-form-field>
+                    </td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <span *ngIf="error" class="span-color" > You can not transfer stock more than available stock..!</span>
+            <span *ngIf="negativeAmountError" class="span-color" > You can not transfer stock in negative figure..!</span>
+            <br>
+            <section class="example-section">
+              <button class="btn-lg" [disabled]=" error || form.invalid || !availableStock.length > 0 || negativeAmountError " mat-raised-button color="warn" type="submit">Send</button>
+            </section>
+          </form>
+
+        </section>
+
+
+
+    </mat-card-content>
+
+
+</mat-card>

@@ -1,0 +1,169 @@
+<!--  -->
+<mat-card>
+  <mat-card-content>
+    <table class="table">
+      <thead>
+        <tr>
+          <!--  <th scope="col">#</th>-->
+          <th scope="col" (click)="sortIt('region')">Region
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('region')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('territory')">Territory
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('territory')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('town_name')">Town
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('town_name')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('DEs_name')">DE Name
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('DEs_name')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('DEs_code')">DE Code
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('DEs_code')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('employee_id')">Employee Id
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('employee_id')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('dsrs')">DSRs
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('dsrs')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('blocks')">Blocks
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('blocks')}}
+            </i>
+          </th>
+          <th scope="col" (click)="sortIt('status')">Status
+            <br>
+            <i class="material-icons arrow">
+              {{getArrowType('status')}}
+            </i>
+          </th>
+          <th>Action
+            <br>
+            <i class="material-icons arrow">
+            </i>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of tableData |  orderBy: sortBy : sortOrder">
+          <tr *ngIf="item.territory != 'All'">
+            <td>{{item.region}}</td>
+            <td>{{item.territory}}</td>
+            <td style="width:30%; word-break: break-word ">{{item.town_name}}</td>
+            <td>{{item.DEs_name}}</td>
+            <td style="color: #3F51B5 ; cursor:pointer;" (click)="setId(item.surveyor_id)">{{item.DEs_code}}</td>
+            <td>{{item.employee_id}}</td>
+            <td>{{item.dsrs}}</td>
+            <td>{{item.blocks}}</td>
+            <td *ngIf="item.status == 'N' ">In-active</td>
+            <td *ngIf="item.status == 'Y' ">Active</td>
+            <td>
+              <button title="edit" type="button" class="btn btn-primary" (click)="showChildModal(item)">
+                <i class="fas fa-pencil-alt"></i>
+              </button>
+
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+<div bsModal #childModal="bs-modal" [config]="{backdrop: 'static',keyboard: false}" class="modal fade" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-child-name" class="modal-title pull-left">Edit DE</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <div class="row w-100">
+            <div class="col-md-12">
+              <mat-form-field class="example-margin example-full-width mr-10-IMP">
+                <input [(ngModel)]="selectedDECode" matInput placeholder="DE Code" disabled>
+              </mat-form-field>
+            </div>
+          </div>
+        <!--<div class="row w-100">
+          <div class="col-md-12">
+            <mat-form-field class="example-margin example-full-width mr-10-IMP">
+              <input [(ngModel)]="selectedDEName" matInput placeholder="DE Name" >
+            </mat-form-field>
+          </div>
+        </div>-->
+          <div class="row w-100">
+            <div class="col-md-12 mx-2">
+              <label for="select"
+                style="color: #a5a2a2;font-size: 12px; ">
+                Select Employee:</label> <br>
+              <select [(ngModel)]="selectedEmployee" class="form-control" class="select-text">
+                <option *ngFor="let item of employeeList" [value]="item.id">{{item.employee_name +' - '+ item.id}}</option>
+              </select>
+
+
+            </div>
+          </div>
+          <div class="row w-100">
+              <div class="col-md-12">
+                  <label for="select" style="
+                            color: #a5a2a2;
+                            font-size: 12px;
+                        "> DE Status :</label> <br>
+                <section class="example-section" placeholder="DE name here">
+                  <mat-slide-toggle
+                    class="example-margin"
+                    [color]="color"
+                    [checked]=""
+                    [disabled]=""
+                    [(ngModel)]="checked"
+                  >
+                    <span *ngIf="checked == true ">Active</span>
+                    <span *ngIf="checked == false ">In-Active</span>
+                  </mat-slide-toggle>
+                </section>
+
+
+                </div>
+          </div>
+
+
+
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button [disabled]="!selectedDEName" class="btn btn-primary" (click)="updateDEName()">
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
