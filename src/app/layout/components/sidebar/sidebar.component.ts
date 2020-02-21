@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.showMenu = '';
         this.menuList=JSON.parse(localStorage.getItem('menu'))
-        console.log(this.menuList,'menu List');
+        console.log(this.menuList,'menu List')
     }
 
     getIndex(i){

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-stat',
@@ -8,11 +9,16 @@ import { Component, OnInit, Input } from '@angular/core';
 export class StatComponent implements OnInit {
     @Input() bgClass: string;
     @Input() icon: string;
-    @Input() count: number;
+    @Input() count: string;
     @Input() label: string;
     @Input() data: number;
 
-    constructor() {}
+    constructor(private router: Router) { }
 
-    ngOnInit() {}
+    ngOnInit() { }
+
+    goToProductivity() {
+        // console.log('clicked')
+        this.router.navigateByUrl('/dashboard/productivity_report')
+    }
 }

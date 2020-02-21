@@ -1,84 +1,96 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatCardModule, MatIconModule, MatTableModule, MatSelectModule, MatNativeDateModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatTableModule,
+    MatFormFieldModule, MatInputModule, MatSelectModule, MatNativeDateModule, MatRadioModule, MatCheckboxModule, MatMenuModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatDatepickerModule, MatDatepickerToggle } from '@angular/material/datepicker';
+import {MatDatepickerModule, MatDatepickerToggle} from '@angular/material/datepicker';
 
 import { StatModule } from '../../shared/modules/stat/stat.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RawDataComponent } from './raw-data/raw-data.component';
-import { FormsModule } from '@angular/forms';
-import { FilterBarComponent } from './inner-pages/filter-bar/filter-bar.component';
-import { VisitProductivityComponent } from './inner-pages/visit-productivity/visit-productivity.component';
-
-import { AttendanceReportComponent } from './inner-pages/attendance-report/attendance-report.component';
-import { MerchandiserListComponent } from './inner-pages/merchandiser-list/merchandiser-list.component';
-import { MerchandiserProductivityComponent } from './inner-pages/merchandiser-productivity/merchandiser-productivity.component';
-import { Ng2OrderModule } from 'ng2-order-pipe';
-import { ShopDetailComponent } from './inner-pages/shop-detail/shop-detail.component';
-import { ModalModule } from 'ngx-bootstrap';
-import { UniqueBaseProductivityComponent } from './inner-pages/unique-base-productivity/unique-base-productivity.component';
-import { NgxPaginationModule } from 'ngx-pagination';
-/*import {LineChartComponent} from './inner-pages/home/line-chart/line-chart.component';*/
-import { HomeComponent } from './inner-pages/home/home.component';
-import { ShopDetailVisitComponent } from './inner-pages/shop-detail-visit/shop-detail.visit.component';
-import { ShopDetailTownStormingComponent } from './inner-pages/shop-detail-town-storming/shop-detail.town_storming.component';
-
-import { StockTransferComponent } from './admin/stock-transfer/stock-transfer.component';
-
-import { ExportDataComponent } from './inner-pages/export-data/export-data.component';
-import { DsrSaleComponent } from './inner-pages/dsr-sale/dsr-sale.component';
-import { DeWwWrSummaryComponent } from './inner-pages/de-ww-wr-summary/de-ww-wr-summary.component';
-import { TmProductivityComponent } from './inner-pages/tm-productivity/tm-productivity.component';
-
-import { SaleAchievementComponent } from './inner-pages/sale-achievement/sale-achievement.component';
-
-import { EvaluationReportVisitWiseComponent } from './inner-pages/evaluation-report-visit-wise/evaluation-report-visit-wise.component';
-import { EvaluationReportDateWiseComponent } from './inner-pages/evaluation-report-date-wise/evaluation-report-date-wise.component';
-import { DsrAttendanceComponent } from './inner-pages/dsr-attendance/dsr-attendance.component';
+import { HomeComponent } from './innerComponents/home/home.component';
+import { ShopListComponent } from './innerComponents/shop-list/shop-list.component';
+import { SummaryComponent } from './innerComponents/summary/summary.component';
+import { ProductivityComponent } from './innerComponents/productivity/productivity.component';
+import { FilterBarComponent } from './innerComponents/filter-bar/filter-bar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetailsComponent } from './innerComponents/details/details.component';
+import { DailyVisitReportComponent } from './innerComponents/daily-visit-report/daily-visit-report.component';
+import { ShopDetailComponent } from './innerComponents/shop-detail/shop-detail.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { MslDashboardComponent } from './innerComponents/msl-dashboard/msl-dashboard.component';
+import { ProductivityDashboardComponent } from './innerComponents/productivity-dashboard/productivity-dashboard.component';
+import { ChartsModule as Ng2Charts } from 'ng2-charts';
+import { TposmDeploymentReportComponent } from './innerComponents/tposm-deployment-report/tposm-deployment-report.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { LineChartComponent } from './innerComponents/home/line-chart/line-chart.component';
+import { UpdatePasswordComponent } from './user/update-password/update-password.component';
+import { RawDataComponent } from './raw-data/raw-data.component';
+import { MatTableComponent } from './innerComponents/mat-table/mat-table.component';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { DataAvailabilityComponent } from './data-availability/data-availability.component';
+import { ButtonsModule } from 'ngx-bootstrap';
+import { MerchandiserListComponent } from './innerComponents/merchandiser-list/merchandiser-list.component';
+import { AbnormalityComponent } from './innerComponents/abnormality/abnormality.component';
+import { TimeAnalysisReportComponent } from './innerComponents/time-analysis-report/time-analysis-report.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { MerchandiserAttendanceComponent } from './innerComponents/merchandiser-attendance/merchandiser-attendance.component';
+import { DailyEvaluationReportComponent } from './innerComponents/daily-evaluation-report/daily-evaluation-report.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
+import { EmailManagerComponent } from './innerComponents/email-manager/email-manager.component';
+import { MessageStatusListComponent } from './innerComponents/email-manager/childComponents/message-status-list/message-status-list.component';
+import { AddNewMessageComponent } from './innerComponents/email-manager/childComponents/add-new-message/add-new-message.component';
+import { UploadRoutesComponent } from './innerComponents/upload-routes/upload-routes.component';
+import { SingleRouteDetailComponent } from './innerComponents/upload-routes/routes-inner-pages/single-route-detail/single-route-detail.component';
+import { ShopsForSingleRouteComponent } from './innerComponents/upload-routes/routes-inner-pages/shops-for-single-route/shops-for-single-route.component';
+import { AddEditGroupComponent } from './innerComponents/email-manager/childComponents/add-edit-group/add-edit-group.component';
+import { AddDeviceComponent } from './innerComponents/add-device/add-device.component';
+import { SupervisorWwwrSummaryComponent } from './innerComponents/supervisor-wwwr-summary/supervisor-wwwr-summary.component';
+import { ShopListReportComponent } from './innerComponents/shop-list-report/shop-list-report.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    DashboardRoutingModule,
-    MatGridListModule,
-    StatModule,
-    MatCardModule,
-    MatCardModule,
-    MatTableModule,
-    MatButtonModule,
-    MatIconModule,
-    FlexLayoutModule.withConfig({ addFlexToParent: false }),
-    HttpClientModule,
-    FormsModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatCardModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    MatInputModule,
-    Ng2OrderModule,
-    ModalModule.forRoot(),
-    NgxPaginationModule,
-    MatTooltipModule
-  ],
-  // tslint:disable-next-line:max-line-length
+    imports: [
+        FormsModule,
+        HttpClientModule,
+        CommonModule,
+        DashboardRoutingModule,
+        MatGridListModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        MatInputModule,
+        MatSelectModule,
+        MatTooltipModule,
+        StatModule,
+        MatCardModule,
+        MatCardModule,
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule,
+        FlexLayoutModule.withConfig({addFlexToParent: false}),
+        ModalModule.forRoot(),
+        Ng2Charts,
+        Ng2OrderModule,
+        ButtonsModule.forRoot(),
+        NgxPaginationModule,
+        MatRadioModule,
+MatCheckboxModule,
+BsDropdownModule.forRoot(),
+MatMenuModule,
+ReactiveFormsModule
 
-  // tslint:disable-next-line:max-line-length
-  declarations: [FilterBarComponent, ShopDetailTownStormingComponent, HomeComponent, DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent, RawDataComponent, UniqueBaseProductivityComponent,
-    ShopDetailVisitComponent,
-    ExportDataComponent,
-    DsrSaleComponent,
-    DeWwWrSummaryComponent,
-    TmProductivityComponent,
-    SaleAchievementComponent,
-    EvaluationReportVisitWiseComponent,
-    EvaluationReportDateWiseComponent,
-    DsrAttendanceComponent]
 
+
+    ],
+    declarations: [DashboardComponent, HomeComponent, ShopListComponent,
+        SummaryComponent, ProductivityComponent, FilterBarComponent,
+        DetailsComponent, DailyVisitReportComponent, ShopDetailComponent,
+         MslDashboardComponent, ProductivityDashboardComponent,
+          TposmDeploymentReportComponent, LineChartComponent,
+          UpdatePasswordComponent, RawDataComponent, MatTableComponent,
+          DataAvailabilityComponent, MerchandiserListComponent,
+          AbnormalityComponent, TimeAnalysisReportComponent, MerchandiserAttendanceComponent, DailyEvaluationReportComponent, EmailManagerComponent, MessageStatusListComponent, AddNewMessageComponent, UploadRoutesComponent, SingleRouteDetailComponent, ShopsForSingleRouteComponent, AddEditGroupComponent, AddDeviceComponent, SupervisorWwwrSummaryComponent, ShopListReportComponent]
 })
-export class DashboardModule { }
+export class DashboardModule {}

@@ -7,15 +7,14 @@
     z-index: 1000;
 }
 
-.nav-brand {
-    width: 215px;
-    text-align: center;
+mat-toolbar {
+    background: lightgray
 }
 
-.title-image {
-    background: white;
-    border-radius: 10px;
-    margin-top: 10px;
+.nav-brand {
+    // margin-top: 1%;
+    width: 215px;
+    text-align: center;
 }
 
 .topnav-icon {
@@ -56,6 +55,9 @@
         display: none;
     }
 }
-.user-name{
-  font-size: 15px;
+
+@media only screen and (max-width: 420px) {
+    .hidden-sm {
+        display: block !important;
+    }
 }

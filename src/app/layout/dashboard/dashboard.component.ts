@@ -1,40 +1,65 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, AfterViewInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import * as moment from 'moment';
-import {Router} from '@angular/router';
-
-export interface PeriodicElement {
-    name: string;
-    position: number;
-    weight: number;
-    symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-    { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-    { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-    { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-    { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-    { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-    { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-    { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' }
-];
+import { DashboardService } from './dashboard.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import * as moment from "moment";
+import { ModalDirective } from 'ngx-bootstrap';
+import { config } from 'src/assets/config';
 
 @Component({
-    selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  main_logo=config.main_logo;
 
-    title = 'dashboard';
-  constructor (private router: Router) {
+  @ViewChild('childModal') childModal: ModalDirective;
 
+  constructor(private httpService: DashboardService, private toastr: ToastrService, private router: Router) {
+    // console.log(router.url);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    var t = moment(new Date).format('YYYY-MM-DD');
+    var st = localStorage.getItem('today');
+    if (t > st) this.router.navigate(['/login']);
+    this.getZone();
+    this.httpService.data.subscribe(data => {
 
-
+      // console.log("download status subscribe",data)
+      if(data)
+      this.showChildModal();
+      else
+      this.hideChildModal();
+      //do what ever needs doing when data changes
+    })
+    
   }
 
+  getZone() {
+    this.httpService.getZone().subscribe(
+      data => {
+        const res: any = data;
+        if (res.zoneList) {
+          localStorage.setItem('zoneList', JSON.stringify(res.zoneList));
+          localStorage.setItem('assetList', JSON.stringify(res.assetList));
+          localStorage.setItem('channelList', JSON.stringify(res.channelList));
+        }
+      },
+      error => {
+        error.status === 0 ? this.toastr.error('Please check Internet Connection', 'Error') : this.toastr.error(error.description, 'Error');
+      }
+    );
+  }
+
+ 
+  showChildModal(): void {
+    this.childModal.show();
+  }
+ 
+  hideChildModal(): void {
+    this.childModal.hide();
+  }
 }

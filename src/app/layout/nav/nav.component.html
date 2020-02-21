@@ -1,11 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="isHandset ? 'dialog' : 'navigation'" [mode]="(isHandset | async)!.matches ? 'over' : 'side'" [opened]="!(isHandset | async)!.matches">
-        <mat-toolbar color="primary">SB Admin Marerial</mat-toolbar>
+        <mat-toolbar color="primary">
+            <img src="assets/images/logo.png">
+        </mat-toolbar>
         <mat-nav-list>
             <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/dashboard']">
                 <mat-icon class="sidenav-icon">dashboard</mat-icon> Dashbard
             </a>
-            <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/charts']">
+            <!-- <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/charts']">
                 <mat-icon class="sidenav-icon">bar_chart</mat-icon> Charts
             </a>
             <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/tables']">
@@ -22,7 +24,7 @@
             </a>
             <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/blank-page']">
                 <mat-icon class="sidenav-icon">insert_drive_file</mat-icon> Black Page
-            </a>
+            </a> -->
             <a mat-list-item>
                 <mat-icon class="sidenav-icon">add</mat-icon> Menu
             </a>

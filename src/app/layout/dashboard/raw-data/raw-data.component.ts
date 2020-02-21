@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./raw-data.component.scss']
 })
 export class RawDataComponent implements OnInit {
-  title = 'raw data';
+  title="raw data"
 
   constructor() { }
 

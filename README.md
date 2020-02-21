@@ -1,4 +1,4 @@
-# SB Admin rewritten in Angular7 and Material2
+<!-- # SB Admin rewritten in Angular7 and Material2
 
 Simple Dashboard Admin App built using Angular 7 and Material 2.
 
@@ -63,5 +63,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-# exTracking
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md). -->

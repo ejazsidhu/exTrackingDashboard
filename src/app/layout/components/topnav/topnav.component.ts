@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { config } from 'src/assets/config';
 
 @Component({
     selector: 'app-topnav',
@@ -9,22 +10,28 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class TopnavComponent implements OnInit {
     public pushRightClass: string;
-    userName: string;
-    panelOpenState = false;
+    showButton=true;
+    userName;
+    main_logo=config.main_logo;
 
     constructor(public router: Router, private translate: TranslateService) {
-       /* this.router.events.subscribe(val => {
+        this.router.events.subscribe(val => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
             }
         });
-        this.userName=localStorage.getItem('user_name');*/
 
+        this.userName=localStorage.getItem('user_name');
     }
 
     ngOnInit() {
         this.pushRightClass = 'push-right';
-        this.userName = localStorage.getItem('username');
+        let url: any = new Array();
+        url = this.router.url.split('/');
+        let t: any = url.find(d => d === 'shop_detail')
+        if (t) {
+            this.showButton = false
+        }
     }
 
     isToggled(): boolean {
@@ -38,10 +45,7 @@ export class TopnavComponent implements OnInit {
     }
 
     onLoggedout() {
-       // localStorage.removeItem('isLoggedin');
-       // localStorage.removeItem('user_id');
-       // localStorage.removeItem('regionId');
-        localStorage.clear();
+        localStorage.removeItem('isLoggedin');
         this.router.navigate(['/login']);
     }
 

@@ -1,55 +1,75 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { VisitProductivityComponent } from './inner-pages/visit-productivity/visit-productivity.component';
-
-import { AttendanceReportComponent } from './inner-pages/attendance-report/attendance-report.component';
-import { MerchandiserListComponent } from './inner-pages/merchandiser-list/merchandiser-list.component';
-import { MerchandiserProductivityComponent } from './inner-pages/merchandiser-productivity/merchandiser-productivity.component';
-import { ShopDetailComponent } from './inner-pages/shop-detail/shop-detail.component';
+import { AuthGuard } from 'src/app/shared/guard';
+import { DashboardGuard } from './dashboard.guard';
+import { HomeComponent } from './innerComponents/home/home.component';
+import { ShopListComponent } from './innerComponents/shop-list/shop-list.component';
+import { SummaryComponent } from './innerComponents/summary/summary.component';
+import { ProductivityComponent } from './innerComponents/productivity/productivity.component';
+import { DetailsComponent } from './innerComponents/details/details.component';
+import { DailyVisitReportComponent } from './innerComponents/daily-visit-report/daily-visit-report.component';
+import { pathToFileURL } from 'url';
+import { ShopDetailComponent } from './innerComponents/shop-detail/shop-detail.component';
+import { MslDashboardComponent } from './innerComponents/msl-dashboard/msl-dashboard.component';
+import { ProductivityDashboardComponent } from './innerComponents/productivity-dashboard/productivity-dashboard.component';
+import { TposmDeploymentReportComponent } from './innerComponents/tposm-deployment-report/tposm-deployment-report.component';
+import { UpdatePasswordComponent } from './user/update-password/update-password.component';
 import { RawDataComponent } from './raw-data/raw-data.component';
-import { UniqueBaseProductivityComponent } from './inner-pages/unique-base-productivity/unique-base-productivity.component';
-import {HomeComponent} from './inner-pages/home/home.component';
-import {ShopDetailVisitComponent} from './inner-pages/shop-detail-visit/shop-detail.visit.component';
-import {ShopDetailTownStormingComponent} from './inner-pages/shop-detail-town-storming/shop-detail.town_storming.component';
-import { ExportDataComponent } from './inner-pages/export-data/export-data.component';
-import {DsrSaleComponent} from './inner-pages/dsr-sale/dsr-sale.component';
-import { DeWwWrSummaryComponent } from './inner-pages/de-ww-wr-summary/de-ww-wr-summary.component';
-import { TmProductivityComponent } from './inner-pages/tm-productivity/tm-productivity.component';
-import { SaleAchievementComponent } from './inner-pages/sale-achievement/sale-achievement.component';
-import { EvaluationReportVisitWiseComponent } from './inner-pages/evaluation-report-visit-wise/evaluation-report-visit-wise.component';
-import { EvaluationReportDateWiseComponent } from './inner-pages/evaluation-report-date-wise/evaluation-report-date-wise.component';
-import { DsrAttendanceComponent } from './inner-pages/dsr-attendance/dsr-attendance.component';
+import { DataAvailabilityComponent } from './data-availability/data-availability.component';
+import { MerchandiserListComponent } from './innerComponents/merchandiser-list/merchandiser-list.component';
+import { AbnormalityComponent } from './innerComponents/abnormality/abnormality.component';
+import { TimeAnalysisReportComponent } from './innerComponents/time-analysis-report/time-analysis-report.component';
+import { MerchandiserAttendanceComponent } from './innerComponents/merchandiser-attendance/merchandiser-attendance.component';
+import { DailyEvaluationReportComponent } from './innerComponents/daily-evaluation-report/daily-evaluation-report.component';
+import { EmailManagerComponent } from './innerComponents/email-manager/email-manager.component';
+import { UploadRoutesComponent } from './innerComponents/upload-routes/upload-routes.component';
+import { SingleRouteDetailComponent } from './innerComponents/upload-routes/routes-inner-pages/single-route-detail/single-route-detail.component';
+import { ShopsForSingleRouteComponent } from './innerComponents/upload-routes/routes-inner-pages/shops-for-single-route/shops-for-single-route.component';
+import { AddDeviceComponent } from './innerComponents/add-device/add-device.component';
+import { SupervisorWwwrSummaryComponent } from './innerComponents/supervisor-wwwr-summary/supervisor-wwwr-summary.component';
+import { ShopListReportComponent } from './innerComponents/shop-list-report/shop-list-report.component';
 
 const routes: Routes = [
-    /*{
-      /!*  path: '',
-        redirectTo: 'visit_productivity'*!/
-      path : '',
-      redirectTo : 'home'
+    {
+        path: '',
+        component: DashboardComponent,
+        canActivate: [DashboardGuard],
+        children: [
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'home', component: HomeComponent },
+            { path: 'daily_visit_report', component: DailyVisitReportComponent },
+            { path: 'oos_details_report', component: DetailsComponent },
+            { path: 'shop_list_report', component: ShopListComponent },
+            { path: 'summary_report', component: SummaryComponent },
+            { path: 'productivity_report', component: ProductivityComponent },
+            { path: 'msl_dashboard', component: MslDashboardComponent },
+            { path: 'productivity_dashboard', component: ProductivityDashboardComponent },
+            { path: 'tposm_deployment_report', component: TposmDeploymentReportComponent },
+            { path: 'daily_evaluation_report', component: DailyEvaluationReportComponent },
+            { path: 'update_password', component: UpdatePasswordComponent },
+            { path: 'raw_data', component: RawDataComponent },
+            { path: 'brand_sku_oos', component: DataAvailabilityComponent },
+            { path: 'supervisor_wwwr_summary', component: SupervisorWwwrSummaryComponent },
+            { path: 'data_abnormality_report', component: AbnormalityComponent },
+            { path: 'time-analysis-report', component: TimeAnalysisReportComponent },
+            { path: 'shop-list-report', component: ShopListReportComponent },
+            { path: 'merchandiser_List', component: MerchandiserListComponent },
+            { path: 'merchandiser_attendance', component: MerchandiserAttendanceComponent },
+            { path: 'sms_manager', component: EmailManagerComponent },
+            { path: 'upload_routes/route_list', component: UploadRoutesComponent },
+            { path: 'upload_routes/single_route_details', component: SingleRouteDetailComponent },
+            { path: 'upload_routes/shops_for_single_route', component: ShopsForSingleRouteComponent },
+            { path: 'add_device', component: AddDeviceComponent },
 
-    },*/
-  { path: '', redirectTo: 'productivity_report', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-    { path: 'visit_productivity', component: VisitProductivityComponent },
-    { path: 'attendance_report', component: AttendanceReportComponent },
-    { path: 'unique-base-productivity', component: UniqueBaseProductivityComponent },
-    { path: 'merchandiser_List', component: MerchandiserListComponent },
-    { path: 'productivity_report', component: MerchandiserProductivityComponent },
-    { path: 'export-data', component: ExportDataComponent },
-    { path: 'evaluation_report_visit_wise', component: EvaluationReportVisitWiseComponent },
-    { path: 'evaluation_report_date_wise', component: EvaluationReportDateWiseComponent },
-    { path: 'dsr_attendance', component: DsrAttendanceComponent },
-    { path: 'raw_data', component: RawDataComponent },
-    { path: 'evaluation', loadChildren: '../evaluation/evaluation.module#EvaluationModule' },
-    { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
-    {path : 'de_wwwr_summary', component: DeWwWrSummaryComponent },
+
+
+        ]
+    },
+    // { path: 'shop_detail/:id', component: ShopDetailComponent },
     { path: 'shop_detail/:id', component: ShopDetailComponent },
-    {path : 'shop_detail_visit/:id' , component: ShopDetailVisitComponent },
-    {path : 'shop_detail_town_storming/:id', component: ShopDetailTownStormingComponent },
-    {path : 'dsr-sale', component: DsrSaleComponent },
-    {path: 'tm_productivity_report' , component: TmProductivityComponent },
-    {path: 'sale_achievement' , component: SaleAchievementComponent },
+
+    { path: 'evaluation', loadChildren: './evaluation/evaluation.module#EvaluationModule' },
 
 ];
 
@@ -57,4 +77,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule { }

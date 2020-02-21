@@ -6,6 +6,7 @@ import { MatButtonModule, MatCheckboxModule, MatInputModule } from '@angular/mat
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
         MatCheckboxModule,
         MatButtonModule,
         FlexLayoutModule.withConfig({addFlexToParent: false}),
-        FormsModule
+        FormsModule,
+        CustomFormsModule
     ],
     declarations: [LoginComponent]
 })

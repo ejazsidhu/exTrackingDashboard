@@ -1,5 +1,4 @@
 #sidebar {
-
     width: 250px;
     position: fixed;
     top: 56px;
@@ -19,10 +18,7 @@
         }
     }
 }
-#sidebar img{
 
-    width: 100px !important;
-}
 .nested-menu {
     .nested {
         list-style-type: none;
@@ -30,7 +26,6 @@
     .submenu {
         display: none;
         height: 0;
-        alignment: center;
     }
     & .expand {
         &.submenu {
@@ -54,13 +49,13 @@
     }
 }
 
-.bottom-fixed {
-    // width: 130px !important;
-    margin: 0 25%;
-}
-
 .link-active {
     background-color: #F3F3F3;
 }
 
-
+.bottom-fixed {
+    position: absolute;
+    bottom: 5px;
+    left: 45px;
+    width: 130px !important;
+}

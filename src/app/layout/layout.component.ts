@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-    hideSideBar: boolean = false;
+    hideSideBar: boolean = false; //make default value to false after completing SMS manager;
     constructor(public router: Router) { }
 
     ngOnInit() {
