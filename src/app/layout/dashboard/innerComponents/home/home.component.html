@@ -70,11 +70,11 @@
 
 
     <div class="row" *ngIf="!loading">
-        <div class="col-md">
+        <div class="col-md-6">
 
             <mat-card>
                 <mat-card-header>
-                    <mat-card-title>MSL & OOS</mat-card-title>
+                    <mat-card-title>Achievement Average</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                     <div class="chart">
@@ -135,74 +135,6 @@
 <div class="container-fluid mobile-view">
     <!-- <p>mobile view</p> -->
 
-    <div *ngIf="!loading" class="mb-20 animated  slideInLeft" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
-        <div class="row">
-            <div class="col-md-12">
-                <mat-card>
-                    <mat-card-header style="justify-content: flex-end;">
-                        <mat-card-title>
-                            <i class="material-icons refresh-btn" matTooltip="Refresh Stats" (click)="getData()">
-                                            cached
-                                            </i>
-                        </mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <div class="row">
-                            <div class="col-6 mobile-view-info-tabs">
-                                <div>
-                                    <app-stat [bgClass]="'info'" [icon]="'assignment'" [count]="tabsData?.planned" [label]="'Planned'">
-                                    </app-stat>
-                                </div>
-                            </div>
-                            <div class="col-6 mobile-view-info-tabs">
-                                <div>
-                                    <app-stat [bgClass]="'warn'" [icon]="'check_circle'" [count]="tabsData?.completed" [label]="'Productive'">
-                                    </app-stat>
-                                </div>
-                            </div>
-                            <div class="col-6 mobile-view-info-tabs">
-                                <div>
-                                    <app-stat [bgClass]="'success'" [icon]="'thumb_up'" [count]="tabsData?.successful" [label]="'Successful'"></app-stat>
-                                </div>
-                            </div>
-                            <div class="col-6 mobile-view-info-tabs">
-
-                                <div>
-                                    <app-stat [bgClass]="'danger'" [icon]="'thumb_down'" [count]="tabsData?.unsuccessful" [label]="'Un-Successful'"></app-stat>
-                                </div>
-                            </div>
-
-                            <div class="col-6 mobile-view-info-tabs">
-                                <div>
-                                    <app-stat [bgClass]="'danger'" [icon]="'contact_support'" [count]="tabsData?.unvisited" [label]="'Unvisited'">
-                                    </app-stat>
-                                </div>
-                            </div>
-
-                            <div class="col-6 mobile-view-info-tabs">
-                                <div>
-                                    <app-stat [bgClass]="'purple'" [icon]="'check_circle'" [count]="tabsData?.completedPercent" [label]="'Productivity %'"></app-stat>
-                                </div>
-                            </div>
-
-                            <div class="col-6 mobile-view-info-tabs">
-
-                                <div>
-                                    <app-stat [bgClass]="'primary'" [icon]="'thumb_up'" [count]="tabsData?.successfulPercent" [label]="'Successful %'"></app-stat>
-                                </div>
-                            </div>
-
-
-
-
-                        </div>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </div>
-    </div>
-
-
 
     <div class="row" *ngIf="!loading">
         <div class="col-md-4">
@@ -227,10 +159,7 @@
                 </mat-card-header>
 
                 <mat-card-content>
-                    <!-- <div class="chart">
-                                        <canvas baseChart [data]="pieChartData2" [labels]="pieChartLabels2" [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColors2" [legend]="pieChartLegend">
-                                                                    </canvas>
-                                    </div> -->
+              
 
                     <div style="display: block">
                         <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [options]="doughnutChartOptions" [colors]="pieChartColors2 ">
@@ -252,15 +181,6 @@
     <div class="row" *ngIf="!loading">
 
     </div>
-    <!-- <div class="row mt-3">
-        <div class="col-md-12">
-            <mat-card>
-                <mat-card-content>
-                    <div id="map"></div>
-                </mat-card-content>
-            </mat-card>
-        </div>
-    </div> -->
 
 
     <div *ngIf="loading " class="mb-20 " flFlex flexLayout="row " flexLayout.lt-md="column ">

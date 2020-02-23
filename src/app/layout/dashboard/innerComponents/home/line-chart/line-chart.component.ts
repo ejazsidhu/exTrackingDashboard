@@ -15,15 +15,15 @@ export class LineChartComponent implements OnInit {
   constructor(private httpService:DashboardService) { }
 
   ngOnInit() {
-    this.httpService.getLineChartData().subscribe(data=>{
-      let res:any=data;
+    // this.httpService.getLineChartData().subscribe(data=>{
+    //   let res:any=data;
 
-      this.chartClicked=res;
-      this.lineChartData[0].data=res.completion;
-      this.lineChartData[1].data=res.successfull;
-      this.lineChartLabels=res.date
+    //   this.chartClicked=res;
+    //   this.lineChartData[0].data=res.completion;
+    //   this.lineChartData[1].data=res.successfull;
+    //   this.lineChartLabels=res.date
 
-      },error=>{})
+    //   },error=>{})
   }
   public lineChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Productive'   },

@@ -34,7 +34,7 @@ const routes: Routes = [
     {
         path: '',
         component: DashboardComponent,
-        canActivate: [DashboardGuard],
+        // canActivate: [DashboardGuard],
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -68,8 +68,6 @@ const routes: Routes = [
     },
     // { path: 'shop_detail/:id', component: ShopDetailComponent },
     // { path: 'shop_detail/:id', component: ShopDetailComponent },
-
-    // { path: 'evaluation', loadChildren: './evaluation/evaluation.module#EvaluationModule' },
 
 ];
 
