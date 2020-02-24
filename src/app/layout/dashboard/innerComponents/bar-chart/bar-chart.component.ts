@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 // import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 // import { Label } from 'ng2-charts';
@@ -8,12 +8,13 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss']
 })
-export class BarChartComponent implements OnInit {
+export class BarChartComponent implements OnInit,OnChanges {
 
-  @Input('barCharData') inpuBarChartData;
+  @Input('barCharData') inputForBarChart;
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: { xAxes: [{}], yAxes: [{}] },
     plugins: {
@@ -23,14 +24,14 @@ export class BarChartComponent implements OnInit {
       }
     }
   };
-  public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: ChartType = 'bar';
+  public barChartLabels = ['2019'];
+  // public barChartType: ChartType = 'bar';
+  public barChartType: ChartType = 'horizontalBar';
+
   public barChartLegend = true;
   // public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
 
   constructor() { }
@@ -59,5 +60,27 @@ export class BarChartComponent implements OnInit {
       40];
     this.barChartData[0].data = data;
   }
+ngOnChanges(changes:SimpleChanges){
+  console.log("on changes",changes);
+  let result=[]
+  if(changes.inputForBarChart){
 
+    changes.inputForBarChart.currentValue.forEach(element => {
+
+      let obj={
+        data:[element.avg],
+        label:element.name
+      }
+      result.push(obj);
+      
+    });
+
+    console.log("result",result)
+    this.barChartData=result;
+
+
+
+  }
+
+}
 }

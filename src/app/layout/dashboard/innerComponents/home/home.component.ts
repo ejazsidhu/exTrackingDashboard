@@ -245,7 +245,7 @@ let achivementArray=data.map(m=>(m.achievement|| 0))
     
     let ach=list.map(m=>m.achievement)
     let avg=ach.reduce((a,b)=>{return a+b });
-    console.log(avg)
+    // console.log(avg)
     return Math.round(avg/list.length);
 
   }
@@ -253,7 +253,7 @@ let achivementArray=data.map(m=>(m.achievement|| 0))
 
     let ach=list.map(m=>m.achievement)
     let avg=ach.reduce((a,b)=>{return a+b });
-    console.log(avg)
+    // console.log(avg)
     return Math.round(avg);
 
   }
