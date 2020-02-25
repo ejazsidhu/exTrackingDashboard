@@ -23,6 +23,9 @@ export class BarChartComponent implements OnInit,OnChanges {
         align: 'end',
       }
     }
+    ,legend:{
+      position:"right"
+    }
   };
   public barChartLabels = ['2019'];
   public barChartType: ChartType = 'bar';
@@ -65,7 +68,9 @@ ngOnChanges(changes:SimpleChanges){
   let result=[]
   if(changes.inputForBarChart){
 
-    changes.inputForBarChart.currentValue.forEach(element => {
+    let dataArray=[...changes.inputForBarChart.currentValue];
+
+    dataArray.forEach(element => {
 
       let obj={
         data:[element.avg],
