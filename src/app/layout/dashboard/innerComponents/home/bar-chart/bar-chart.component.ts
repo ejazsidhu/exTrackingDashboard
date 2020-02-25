@@ -25,8 +25,8 @@ export class BarChartComponent implements OnInit,OnChanges {
     }
   };
   public barChartLabels = ['2019'];
-  // public barChartType: ChartType = 'bar';
-  public barChartType: ChartType = 'horizontalBar';
+  public barChartType: ChartType = 'bar';
+  // public barChartType: ChartType = 'horizontalBar';
 
   public barChartLegend = true;
   // public barChartPlugins = [pluginDataLabels];
