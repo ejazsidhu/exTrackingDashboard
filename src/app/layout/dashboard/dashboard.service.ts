@@ -40,7 +40,7 @@ configFile = config;
 
   //#region ex tracking calls
 
-  getExTrackingDasboardData(obj){
+  getExTrackingDashboardData(obj){
     let body = null;
     if (obj != null) {
       body = this.UrlEncodeMaker(obj);

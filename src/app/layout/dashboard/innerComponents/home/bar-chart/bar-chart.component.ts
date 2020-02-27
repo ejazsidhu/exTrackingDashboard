@@ -11,6 +11,7 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 export class BarChartComponent implements OnInit,OnChanges {
 
   @Input('barCharData') inputForBarChart;
+  @Input('chartPosition') chartPosition;
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -22,10 +23,11 @@ export class BarChartComponent implements OnInit,OnChanges {
         anchor: 'end',
         align: 'end',
       }
-    }
-    ,legend:{
-      position:"right"
-    }
+    },
+    legend:{
+      position:this.chartPosition || "bottom"
+    },
+    events: ['click']
   };
   public barChartLabels = ['2019'];
   public barChartType: ChartType = 'bar';
@@ -43,29 +45,22 @@ export class BarChartComponent implements OnInit,OnChanges {
   }
 
   // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+  public chartClicked(e): void {
+
+    // const activePoints = this.barChartType.getElementAtEvent(e.event);
+    // console.log("chart clicked",activePoints)
+
+
   }
 
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
 
-  public randomize(): void {
-    // Only Change 3 values
-    const data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40];
-    this.barChartData[0].data = data;
-  }
+ 
 ngOnChanges(changes:SimpleChanges){
-  console.log("on changes",changes);
-  let result=[]
+  // console.log("on changes",changes);
+  let result=[];
   if(changes.inputForBarChart){
 
     let dataArray=[...changes.inputForBarChart.currentValue];
@@ -80,7 +75,10 @@ ngOnChanges(changes:SimpleChanges){
       
     });
 
+    //
+    
     console.log("result",result)
+    if(result.length>0)
     this.barChartData=result;
 
 
