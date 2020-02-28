@@ -50,6 +50,8 @@ import { AddDeviceComponent } from './innerComponents/add-device/add-device.comp
 import { SupervisorWwwrSummaryComponent } from './innerComponents/supervisor-wwwr-summary/supervisor-wwwr-summary.component';
 import { ShopListReportComponent } from './innerComponents/shop-list-report/shop-list-report.component';
 import { BarChartComponent } from './innerComponents/home/bar-chart/bar-chart.component';
+import { DrawChartComponent } from './innerComponents/home/draw-chart/draw-chart.component';
+import { PieChartComponent } from './innerComponents/home/pie-chart/pie-chart.component';
 
 
 @NgModule({
@@ -98,6 +100,6 @@ ReactiveFormsModule
            EmailManagerComponent, MessageStatusListComponent, AddNewMessageComponent,
             UploadRoutesComponent, SingleRouteDetailComponent, ShopsForSingleRouteComponent,
              AddEditGroupComponent, AddDeviceComponent, SupervisorWwwrSummaryComponent,
-              ShopListReportComponent, BarChartComponent]
+              ShopListReportComponent, BarChartComponent, DrawChartComponent, PieChartComponent]
 })
 export class DashboardModule {}
