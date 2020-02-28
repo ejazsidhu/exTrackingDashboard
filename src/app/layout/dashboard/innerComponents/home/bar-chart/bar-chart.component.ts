@@ -61,14 +61,14 @@ export class BarChartComponent implements OnInit,OnChanges {
 ngOnChanges(changes:SimpleChanges){
   // console.log("on changes",changes);
   let result=[];
-  if(changes.inputForBarChart){
+  if(changes.inputForBarChart.currentValue.length>0){
 
     let dataArray=[...changes.inputForBarChart.currentValue];
 
     dataArray.forEach(element => {
 
       let obj={
-        data:[element.avg],
+        data:[element.avg] || [0],
         label:element.name
       }
       result.push(obj);

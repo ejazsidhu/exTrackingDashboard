@@ -9,7 +9,7 @@ import { ChartType, ChartOptions } from "chart.js";
   templateUrl: './draw-chart.component.html',
   styleUrls: ['./draw-chart.component.scss']
 })
-export class DrawChartComponent implements OnInit,OnChanges {
+export class DrawChartComponent implements OnChanges {
 
   @Input("chartsData") chartsData;
   @Input() loading;
@@ -35,40 +35,8 @@ export class DrawChartComponent implements OnInit,OnChanges {
               this.compileDataForCharts(this.chartsData.slice());
             }
   }
-  ngOnInit() {
-    // this.getEXTDashboardData(this.chartsData);
 
-    // interval(300000).subscribe(i=>{this.getData()})
-    // this.httpService.checkDate();
-
-    // let userType=JSON.parse(localStorage.getItem("user_type"))
-
-    // if(userType==16){
-    //   this.router.navigate(['/dashboard/merchandiser_List'])
-    // }
-  }
-
-  // doughnut chart
-  public doughnutChartLabels: any[] = ["CBL", "Competition"];
-  public doughnutChartData: any = [[350, 450]];
-  public doughnutChartType: ChartType = "doughnut";
-
-  public doughnutChartOptions: any = {
-    type: "doughnut",
-    legend: {
-      position: "right"
-    },
-    tooltips: {
-      callbacks: {
-        afterLabel: function(tooltipItem, data) {
-          var dataset = data["datasets"][0];
-          var percent = Math.round(dataset["data"][tooltipItem["index"]]);
-          return "(" + percent + "%)";
-        }
-      }
-    }
-  };
-  // doughnut chart end
+ 
   // pi cahrt
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -137,34 +105,6 @@ export class DrawChartComponent implements OnInit,OnChanges {
   }
   // pie chart end
 
-  
-
-  // getEXTDashboardData() {
-  //   let obj = {
-  //     userId: -1,
-  //     cityId: -1,
-  //     regionId: -1,
-  //     brandId: -1,
-  //     month: 11,
-  //     year: 2019
-  //   };
-  //   this.httpService.getExTrackingDashboardData(obj).subscribe(
-  //     (data: any) => {
-  //       // console.log(data, 'home data');
-  //       if (data) {
-  //         this.dashboardData = data;
-  //         this.compileDataForCharts(data.slice());
-  //       }
-  //       this.loading = false;
-
-  //       // this.pieChartData=[this.tabsData.msl,100-this.tabsData.msl];
-  //       // this.doughnutChartData=[this.tabsData.sos,100-this.tabsData.sos]
-  //     },
-  //     error => {
-  //       console.log(error, "home error");
-  //     }
-  //   );
-  // }
 
   compileDataForCharts(data) {
     console.log("data array", data);
@@ -267,7 +207,7 @@ export class DrawChartComponent implements OnInit,OnChanges {
     );
     let saleLabels = this.regionAchievementAvgList.map(r => [r.name]);
 
-    this.pieChartData = [saleList, 100];
+    this.pieChartData = [saleList||[0], 100];
     this.pieChartLabels = [];
     this.pieChartLabels = saleLabels;
   }
