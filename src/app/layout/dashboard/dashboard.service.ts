@@ -23,6 +23,9 @@ configFile = config;
   private dataSource = new Subject();
   data = this.dataSource.asObservable();
 
+  private chartSelectedData$ = new Subject<any>();
+  chartSelectedData = this.chartSelectedData$.asObservable();
+
   // ip: any = 'http://192.168.3.162:8080/audit/';
 
   // ip: any='http://192.168.3.142:8080/audit/';
@@ -48,6 +51,10 @@ configFile = config;
     }
     const url = this.ip + 'portal/ndn/secondary-sale';
     return this.http.post(url, body, this.httpOptions);
+  }
+
+  updatedChartStatus(data) {
+    this.chartSelectedData$.next(data);
   }
 
 //#endregion

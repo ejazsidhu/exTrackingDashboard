@@ -110,7 +110,7 @@
                     <mat-card-title>Brand</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <app-bar-chart [barCharData]="brandAchievementAvgList" [chartPosition]="'bottom'"></app-bar-chart>
+                    <app-bar-chart [barCharData]="brandAchievementAvgList" [chartPosition]="'bottom'" [chartName]="'brand'"></app-bar-chart>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -121,7 +121,7 @@
                     <mat-card-title>Territory</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <app-bar-chart [barCharData]="territoryAchievementAvgList" [chartPosition]="'bottom'"></app-bar-chart>
+                    <app-bar-chart [barCharData]="territoryAchievementAvgList" [chartPosition]="'bottom'" [chartName]="'territory'"></app-bar-chart>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -173,7 +173,7 @@
 
                 <mat-card-content>
                     <div style="display: block">
-                        <app-bar-chart [barCharData]="brandAchievementAvgList" [chartPosition]="'bottom'"></app-bar-chart>
+                        <!-- <app-bar-chart [barCharData]="brandAchievementAvgList" [chartPosition]="'bottom'" [chartName]="'brand'"></app-bar-chart> -->
 
                     </div>
                 </mat-card-content>
@@ -191,7 +191,7 @@
 
 
                     <div style="display: block">
-                        <app-bar-chart [barCharData]="territoryAchievementAvgList" [chartPosition]="'bottom'"></app-bar-chart>
+                        <app-bar-chart [barCharData]="territoryAchievementAvgList" [chartPosition]="'bottom'" [chartName]="'territory'"></app-bar-chart>
 
                     </div>
                 </mat-card-content>

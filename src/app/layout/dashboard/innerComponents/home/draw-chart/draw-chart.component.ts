@@ -34,6 +34,25 @@ export class DrawChartComponent implements OnChanges {
               this.dashboardData = this.chartsData;
               this.compileDataForCharts(this.chartsData.slice());
             }
+
+            this.httpService.chartSelectedData.subscribe((data:any)=>{
+              console.log("chart data in draw chart component",data);
+              if(this.selectedZone && data.chartName=="brand")
+              {
+                let bData=this.dashboardData.filter(b=>b.region_name==this.selectedZone && b.family_title==data.selectedBar);
+                this.getTerritoryByBrandName(bData,data.selectedBar);
+
+                     
+              }
+
+              if(this.selectedZone && data.chartName=="territory")
+              {
+                let tData=this.dashboardData.filter(b=>b.region_name==this.selectedZone && b.territory_name==data.selectedBar);
+                this.getBrandsByTerritoryName(tData,data.selectedBar);
+                     
+              }
+
+            })
   }
 
  
@@ -212,6 +231,74 @@ export class DrawChartComponent implements OnChanges {
     this.pieChartLabels = saleLabels;
   }
 
+  getTerritoryByBrandName(brandArray,brandName){
+    this.territoryData=[];
+    this.territoryAchievementAvgList=[];
+    const territoryIds: any = brandArray.map(b => b.territory_id);
+    let territoryDistinctList = [...new Set(territoryIds)];
+    this.territoryData = brandArray.map(m => {
+
+        let obj = {
+          territoryId: m.territory_id,
+          territoryName: m.territory_name,
+          achievement: m.achievement || 0
+        };
+        return obj;
+      
+      
+    });
+
+    territoryDistinctList.forEach(element => {
+      let obj = {
+        id: element,
+        name: this.territoryData.filter(b => b.territoryId == element)[0]
+          .territoryName,
+        territoryOBJ: this.territoryData.filter(b => b.territoryId == element),
+        avg: this.getAverage(
+          this.territoryData.filter(b => b.territoryId == element)
+        ),
+        total: this.getTotal(
+          this.territoryData.filter(b => b.territoryId == element)
+        )
+      };
+
+      this.territoryAchievementAvgList.push(obj);
+      // t.push(obj)
+    });
+
+    console.log('brand based territory',this.territoryAchievementAvgList)
+
+  }
+
+  getBrandsByTerritoryName(territoryArray,brandName){
+    this.brandData=[];
+    this.brandAchievementAvgList=[];
+    this.brandData = territoryArray.map(m => {
+  
+      let obj = {
+        brandId: m.family_id,
+        brandName: m.family_title,
+        achievement: m.achievement || 0,
+      }
+      return obj;
+    
+    });
+
+    const brandIds: any = territoryArray.map(b => b.family_id);
+    let brandDistinctList = [...new Set(brandIds)];
+    brandDistinctList.forEach(element => {
+      let obj = {
+        id: element,
+        name: this.brandData.filter(b => b.brandId == element)[0].brandName,
+        brandOBJ: this.brandData.filter(b => b.brandId == element),
+        avg: this.getAverage(this.brandData.filter(b => b.brandId == element)),
+        total: this.getTotal(this.brandData.filter(b => b.brandId == element))
+      };
+
+      this.brandAchievementAvgList.push(obj);
+    });
+
+  }
   getSingleZoneData(data) {
     // this.loading=true;
     this.brandData=[];
@@ -226,7 +313,8 @@ export class DrawChartComponent implements OnChanges {
       let obj = {
         brandId: m.family_id,
         brandName: m.family_title,
-        achievement: m.achievement || 0
+        achievement: m.achievement || 0,
+        
       };
       return obj;
     }

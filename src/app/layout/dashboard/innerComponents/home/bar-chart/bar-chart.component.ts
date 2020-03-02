@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { DashboardService } from '../../../dashboard.service';
 // import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 // import { Label } from 'ng2-charts';
 
@@ -12,6 +13,8 @@ export class BarChartComponent implements OnInit,OnChanges {
 
   @Input('barCharData') inputForBarChart;
   @Input('chartPosition') chartPosition;
+
+  @Input('chartName') chartName;
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -27,7 +30,18 @@ export class BarChartComponent implements OnInit,OnChanges {
     legend:{
       position:this.chartPosition || "bottom"
     },
-    events: ['click']
+    tooltips: {
+      callbacks: {
+        label: (tooltipItem, data) => {
+          var label = data.datasets[tooltipItem.datasetIndex].label || "";
+          console.log("tooltip point", label,data["datasets"]);
+          this.selectedBar=label;
+          // var dataset = data["datasets"].filter(d=>d.label==this.selectedBar).data[0];
+
+          return label;
+        }
+      }
+    }
   };
   public barChartLabels = ['2019'];
   public barChartType: ChartType = 'bar';
@@ -38,8 +52,9 @@ export class BarChartComponent implements OnInit,OnChanges {
 
   public barChartData: ChartDataSets[] = [
   ];
+  selectedBar: any="";
 
-  constructor() { }
+  constructor(private httpService:DashboardService) { }
 
   ngOnInit() {
   }
@@ -48,7 +63,8 @@ export class BarChartComponent implements OnInit,OnChanges {
   public chartClicked(e): void {
 
     // const activePoints = this.barChartType.getElementAtEvent(e.event);
-    // console.log("chart clicked",activePoints)
+    console.log("chart clicked",this.chartName,this.selectedBar,)
+    this.httpService.updatedChartStatus({chartName:this.chartName,selectedBar:this.selectedBar})
 
 
   }
@@ -61,7 +77,7 @@ export class BarChartComponent implements OnInit,OnChanges {
 ngOnChanges(changes:SimpleChanges){
   // console.log("on changes",changes);
   let result=[];
-  if(changes.inputForBarChart.currentValue.length>0){
+  if(changes.inputForBarChart.currentValue){
 
     let dataArray=[...changes.inputForBarChart.currentValue];
 
@@ -78,8 +94,8 @@ ngOnChanges(changes:SimpleChanges){
     //
     
     console.log("result",result)
-    if(result.length>0)
-    this.barChartData=result;
+    if(result)
+    this.barChartData=result || [];
 
 
 
@@ -87,3 +103,4 @@ ngOnChanges(changes:SimpleChanges){
 
 }
 }
+
