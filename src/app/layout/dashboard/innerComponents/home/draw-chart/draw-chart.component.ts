@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { DashboardService } from '../../../dashboard.service';
 import { Router } from '@angular/router';
 import { ChartType, ChartOptions } from "chart.js";
@@ -13,6 +13,7 @@ export class DrawChartComponent implements OnChanges {
 
   @Input("chartsData") chartsData;
   @Input() loading;
+  @Output() resetChart=new EventEmitter();
 
   tabsData: any = [];
   // loading = true;
@@ -54,7 +55,14 @@ export class DrawChartComponent implements OnChanges {
 
             })
   }
-
+  resetCharts(){
+    // this.brandData=[];
+    // this.territoryData=[];
+    // this.brandAchievementAvgList=[];
+    // this.territoryAchievementAvgList=[];
+    // // this.compileDataForCharts(this.dashboardData)
+    this.resetChart.emit(true)
+  }
  
   // pi cahrt
   public pieChartOptions: ChartOptions = {
