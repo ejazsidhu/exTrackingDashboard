@@ -46,13 +46,23 @@ configFile = config;
 
   //#region ex tracking calls
 
-  getExTrackingDashboardData(obj){
+  getExTrackingSecondaryDashboardData(obj){
     let body = null;
     if (obj != null) {
       body = this.UrlEncodeMaker(obj);
       
     }
     const url = this.ip + 'portal/ndn/secondary-sale';
+    return this.http.post(url, body, this.httpOptions);
+  }
+
+  getExTrackingPrimaryDashboardData(obj){
+    let body = null;
+    if (obj != null) {
+      body = this.UrlEncodeMaker(obj);
+      
+    }
+    const url = this.ip + 'portal/ndn/primary-sale';
     return this.http.post(url, body, this.httpOptions);
   }
 
