@@ -3,7 +3,6 @@ import { DashboardService } from '../../../dashboard.service';
 import { Router } from '@angular/router';
 import { ChartType, ChartOptions } from "chart.js";
 
-
 @Component({
   selector: 'draw-chart',
   templateUrl: './draw-chart.component.html',
@@ -14,6 +13,10 @@ export class DrawChartComponent implements OnChanges {
   @Input("chartsData") chartsData;
   @Input() loading;
   @Output() resetChart=new EventEmitter();
+  // minDate = new Date(2000, 0, 1);
+  // maxDate = new Date();
+  // startDate = new Date();
+
 
   tabsData: any = [];
   // loading = true;
@@ -28,6 +31,7 @@ export class DrawChartComponent implements OnChanges {
   regionAchievementAvgList: any = [];
   selectedZone = "";
   zoneClicked = false;
+ 
   constructor(private httpService: DashboardService, private router: Router) {}
 
   ngOnChanges(){
@@ -63,6 +67,8 @@ export class DrawChartComponent implements OnChanges {
     // // this.compileDataForCharts(this.dashboardData)
     this.resetChart.emit(true)
   }
+
+ 
  
   // pi cahrt
   public pieChartOptions: ChartOptions = {

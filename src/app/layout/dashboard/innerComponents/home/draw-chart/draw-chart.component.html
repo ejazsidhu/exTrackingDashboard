@@ -1,7 +1,29 @@
 <div class="container-fluid web-view">
+
+    <!-- filter bar start-->
+    <mat-card class="mb-20">
+
+        <mat-card-content>
+            <!-- <mat-card-title> -->
+            <!-- {{title| uppercase}} <i color="warn" [ngClass]="{'fa fa-cog fa-spin':loadingData}"></i> -->
+            <!-- <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is being prepared for download</small> -->
+
+            <!-- </mat-card-title> -->
+            <section class="example-section">
+
+                <mat-month-picker-custom></mat-month-picker-custom>
+
+
+
+            </section>
+
+
+        </mat-card-content>
+    </mat-card>
+    <!-- filter bar ends -->
     <!-- <p>web view</p> -->
 
-    <div class="row" *ngIf="!loading">
+    <div class="row" *ngIf="!loading && dashboardData.length>0">
         <div class="col-md-6">
 
             <mat-card>
@@ -20,7 +42,7 @@
 
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="brandAchievementAvgList.length>0">
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>Brand</mat-card-title>
@@ -31,7 +53,7 @@
             </mat-card>
         </div>
         <hr/>
-        <div class="col-md-12 mt-5" *ngIf="!!selectedZone && zoneClicked">
+        <div class="col-md-12 mt-5" *ngIf="brandAchievementAvgList.length>0 && !!selectedZone && zoneClicked">
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>Territory</mat-card-title>
@@ -49,9 +71,7 @@
 
     </div>
 
-    <div class="row" *ngIf="!loading">
 
-    </div>
 
 
     <div *ngIf="loading " class="mb-20 " flFlex flexLayout="row " flexLayout.lt-md="column ">
@@ -65,7 +85,7 @@
     <!-- <p>mobile view</p> -->
 
 
-    <div class="row" *ngIf="!loading">
+    <div class="row" *ngIf="!loading && dashboardData.length>0">
         <div class="col-sm-12" style="width: 400px !important;">
 
             <mat-card>
@@ -81,7 +101,7 @@
             </mat-card>
         </div>
 
-        <div class="col-sm-12 mobile-mt-3 mt-3">
+        <div class="col-sm-12 mobile-mt-3 mt-3" *ngIf="brandAchievementAvgList.length>0">
             <mat-card style="margin-top:15px;width: 400px !important;">
                 <mat-card-header>
                     <mat-card-title>Brand </mat-card-title>
@@ -96,7 +116,7 @@
             </mat-card>
         </div>
 
-        <div class="col-sm-12 mobile-mt-3" *ngIf="!!selectedZone && zoneClicked">
+        <div class="col-sm-12 mobile-mt-3" *ngIf="territoryAchievementAvgList.length>0 && !!selectedZone && zoneClicked">
             <!-- <line-chart></line-chart> -->
             <mat-card style="margin-top:15px;width: 400px !important;">
                 <mat-card-header>

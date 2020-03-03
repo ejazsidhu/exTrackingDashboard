@@ -52,7 +52,8 @@ import { ShopListReportComponent } from './innerComponents/shop-list-report/shop
 import { BarChartComponent } from './innerComponents/home/bar-chart/bar-chart.component';
 import { DrawChartComponent } from './innerComponents/home/draw-chart/draw-chart.component';
 import { PieChartComponent } from './innerComponents/home/pie-chart/pie-chart.component';
-
+import { MatMonthPickerComponent } from './innerComponents/home/mat-month-picker/mat-month-picker.component';
+import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 
 @NgModule({
     imports: [
@@ -84,6 +85,7 @@ MatCheckboxModule,
 BsDropdownModule.forRoot(),
 MatMenuModule,
 ReactiveFormsModule
+,MatMomentDateModule
 
 
 
@@ -100,6 +102,6 @@ ReactiveFormsModule
            EmailManagerComponent, MessageStatusListComponent, AddNewMessageComponent,
             UploadRoutesComponent, SingleRouteDetailComponent, ShopsForSingleRouteComponent,
              AddEditGroupComponent, AddDeviceComponent, SupervisorWwwrSummaryComponent,
-              ShopListReportComponent, BarChartComponent, DrawChartComponent, PieChartComponent]
+              ShopListReportComponent, BarChartComponent, DrawChartComponent, PieChartComponent, MatMonthPickerComponent]
 })
 export class DashboardModule {}

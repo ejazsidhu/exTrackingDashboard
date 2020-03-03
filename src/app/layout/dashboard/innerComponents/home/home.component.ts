@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DashboardService } from "../../dashboard.service";
+import * as moment from 'moment';
 
 
 @Component({
@@ -9,29 +10,40 @@ import { DashboardService } from "../../dashboard.service";
 })
 export class HomeComponent implements OnInit {
 
-  loading = true;
+  loading = false;
   dashboardData: any = [];
-  
+  selectedMonth=moment(new Date()).format("M");
+  selectedYear=moment(new Date).format("Y");
   constructor(private httpService: DashboardService) {}
 
   ngOnInit() {
     this.getEXTDashboardData();
 
+    this.httpService.SelectedDate.subscribe(date=>{
+      if(date){
+        this.selectedMonth=date.month;
+        this.selectedYear=date.year;
+        this.getEXTDashboardData();
+      }
+
+    })
+
   }
 
 
   getEXTDashboardData() {
+    this.loading=true;
     let obj = {
       userId: -1,
       cityId: -1,
       regionId: -1,
       brandId: -1,
-      month: 11,
-      year: 2019
+      month: +(this.selectedMonth),
+      year: +(this.selectedYear)
     };
     this.httpService.getExTrackingDashboardData(obj).subscribe(
       (data: any) => {
-     
+     this.dashboardData=[];
         if (data) {
           this.dashboardData = data;
   
