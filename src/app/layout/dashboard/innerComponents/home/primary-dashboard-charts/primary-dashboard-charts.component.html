@@ -1,26 +1,27 @@
-<div class="container-fluid web-view">
+<!-- filter bar start-->
+<mat-card class="mb-20">
 
-    <!-- filter bar start-->
-    <mat-card class="mb-20">
+    <mat-card-content>
+        <!-- <mat-card-title> -->
+        <!-- {{title| uppercase}} <i color="warn" [ngClass]="{'fa fa-cog fa-spin':loadingData}"></i> -->
+        <!-- <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is being prepared for download</small> -->
 
-        <mat-card-content>
-            <!-- <mat-card-title> -->
-            <!-- {{title| uppercase}} <i color="warn" [ngClass]="{'fa fa-cog fa-spin':loadingData}"></i> -->
-            <!-- <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is being prepared for download</small> -->
+        <!-- </mat-card-title> -->
+        <section class="example-section">
 
-            <!-- </mat-card-title> -->
-            <section class="example-section">
-
-                <mat-month-picker-custom></mat-month-picker-custom>
+            <mat-month-picker-custom></mat-month-picker-custom>
 
 
 
-            </section>
+        </section>
 
 
-        </mat-card-content>
-    </mat-card>
-    <!-- filter bar ends -->
+    </mat-card-content>
+</mat-card>
+<!-- filter bar ends -->
+<div class="container-fluid web-view" *ngIf="factoryChartData.length>0; else elseTemplate">
+
+
     <!-- <p>web view</p> -->
 
     <div class="row" *ngIf="!loading && factoryChartData.length>0">
@@ -80,13 +81,9 @@
 
 
 
-    <div *ngIf="loading " class="mb-20 " flFlex flexLayout="row " flexLayout.lt-md="column ">
-        <div fxFlex class="img-center ">
-            <img src="assets/images/basicloader.gif " alt=" " srcset=" ">
-        </div>
-    </div>
-</div>
 
+</div>
+<!-- *ngIf="factoryChartData.length>0; else elseTemplate" -->
 <div class="container-fluid mobile-view">
     <!-- <p>mobile view</p> -->
 
@@ -163,3 +160,14 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="loading " class="mb-20 " flFlex flexLayout="row " flexLayout.lt-md="column ">
+    <div fxFlex class="img-center ">
+        <img src="assets/images/basicloader.gif " alt=" " srcset=" ">
+    </div>
+</div>
+<ng-template #elseTemplate>
+    <div class="text-center mt-5">
+        <h1 style="color: lightgray;">No data Found</h1>
+    </div>
+</ng-template>

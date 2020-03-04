@@ -55,7 +55,7 @@ import { PieChartComponent } from './innerComponents/home/pie-chart/pie-chart.co
 import { MatMonthPickerComponent } from './innerComponents/home/mat-month-picker/mat-month-picker.component';
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 import { PrimaryDashboardChartsComponent } from './innerComponents/home/primary-dashboard-charts/primary-dashboard-charts.component';
-
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
     imports: [
         FormsModule,
@@ -87,7 +87,7 @@ BsDropdownModule.forRoot(),
 MatMenuModule,
 ReactiveFormsModule
 ,MatMomentDateModule
-
+,MatTabsModule
 
 
     ],

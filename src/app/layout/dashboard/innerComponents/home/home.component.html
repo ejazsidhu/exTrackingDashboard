@@ -1,3 +1,14 @@
-<!-- <draw-chart [chartsData]="dashboardData" [loading]="loading" (resetChart)="getEXTDashboardData()"></draw-chart> -->
+<mat-tab-group>
+    <mat-tab label="Primary dashboard">
 
-<primary-dashboard-charts [chartsData]="primaryDashboardData"></primary-dashboard-charts>
+        <primary-dashboard-charts [chartsData]="primaryDashboardData"></primary-dashboard-charts>
+
+    </mat-tab>
+    <mat-tab label="Secondary dashboard">
+        <!-- (resetChart)="getEXTDashboardData()" -->
+
+        <draw-chart [chartsData]="dashboardData" [loading]="loading"></draw-chart>
+
+    </mat-tab>
+
+</mat-tab-group>
