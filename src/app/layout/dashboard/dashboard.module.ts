@@ -54,6 +54,7 @@ import { DrawChartComponent } from './innerComponents/home/draw-chart/draw-chart
 import { PieChartComponent } from './innerComponents/home/pie-chart/pie-chart.component';
 import { MatMonthPickerComponent } from './innerComponents/home/mat-month-picker/mat-month-picker.component';
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
+import { PrimaryDashboardChartsComponent } from './innerComponents/home/primary-dashboard-charts/primary-dashboard-charts.component';
 
 @NgModule({
     imports: [
@@ -102,6 +103,6 @@ ReactiveFormsModule
            EmailManagerComponent, MessageStatusListComponent, AddNewMessageComponent,
             UploadRoutesComponent, SingleRouteDetailComponent, ShopsForSingleRouteComponent,
              AddEditGroupComponent, AddDeviceComponent, SupervisorWwwrSummaryComponent,
-              ShopListReportComponent, BarChartComponent, DrawChartComponent, PieChartComponent, MatMonthPickerComponent]
+              ShopListReportComponent, BarChartComponent, DrawChartComponent, PieChartComponent, MatMonthPickerComponent, PrimaryDashboardChartsComponent]
 })
 export class DashboardModule {}

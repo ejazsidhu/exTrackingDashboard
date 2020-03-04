@@ -1,0 +1,146 @@
+<div class="container-fluid web-view">
+
+    <!-- filter bar start-->
+    <mat-card class="mb-20">
+
+        <mat-card-content>
+            <!-- <mat-card-title> -->
+            <!-- {{title| uppercase}} <i color="warn" [ngClass]="{'fa fa-cog fa-spin':loadingData}"></i> -->
+            <!-- <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is being prepared for download</small> -->
+
+            <!-- </mat-card-title> -->
+            <section class="example-section">
+
+                <mat-month-picker-custom></mat-month-picker-custom>
+
+
+
+            </section>
+
+
+        </mat-card-content>
+    </mat-card>
+    <!-- filter bar ends -->
+    <!-- <p>web view</p> -->
+
+    <div class="row" *ngIf="!loading && factoryChartData.length>0">
+        <div class="col-md-6">
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Factory
+                        <!-- <span><i class="fa fa-refresh" (click)="resetCharts()"></i></span> -->
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <app-pie-chart [pieChartInputData]="factoryChartData"></app-pie-chart>
+
+                </mat-card-content>
+            </mat-card>
+
+        </div>
+
+        <!-- <div class="col-md-6" *ngIf="brandAchievementAvgList.length>0">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Brand</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <app-bar-chart [barCharData]="brandAchievementAvgList" [chartPosition]="'bottom'" [chartName]="'brand'"></app-bar-chart>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <hr/>
+        <div class="col-md-12 mt-5" *ngIf="brandAchievementAvgList.length>0 && !!selectedZone && zoneClicked">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Territory</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <app-bar-chart [barCharData]="territoryAchievementAvgList" [chartPosition]="'bottom'" [chartName]="'territory'"></app-bar-chart>
+                </mat-card-content>
+            </mat-card>
+        </div> -->
+
+
+
+
+    </div>
+
+
+
+
+    <div *ngIf="loading " class="mb-20 " flFlex flexLayout="row " flexLayout.lt-md="column ">
+        <div fxFlex class="img-center ">
+            <img src="assets/images/basicloader.gif " alt=" " srcset=" ">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mobile-view">
+    <!-- <p>mobile view</p> -->
+
+
+    <div class="row" *ngIf="!loading && factoryChartData.length>0">
+        <div class="col-sm-12" style="width: 400px !important;">
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Achievement</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="chart">
+                        <app-pie-chart [pieChartInputData]="factoryChartData"></app-pie-chart>
+
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <!-- <div class="col-sm-12 mobile-mt-3 mt-3" *ngIf="brandAchievementAvgList.length>0">
+            <mat-card style="margin-top:15px;width: 400px !important;">
+                <mat-card-header>
+                    <mat-card-title>Brand </mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <div style="display: block">
+                        <app-bar-chart [barCharData]="brandAchievementAvgList" [chartPosition]="'bottom'" [chartName]="'brand'"></app-bar-chart>
+
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-sm-12 mobile-mt-3" *ngIf="territoryAchievementAvgList.length>0 && !!selectedZone && zoneClicked">
+           
+            <mat-card style="margin-top:15px;width: 400px !important;">
+                <mat-card-header>
+                    <mat-card-title>Territory</mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+
+
+                    <div style="display: block">
+                        <app-bar-chart [barCharData]="territoryAchievementAvgList" [chartPosition]="'bottom'" [chartName]="'territory'"></app-bar-chart>
+
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div> -->
+
+
+    </div>
+
+    <div class="row" *ngIf="!loading">
+
+    </div>
+
+
+    <div *ngIf="loading " class="mb-20 " flFlex flexLayout="row " flexLayout.lt-md="column ">
+        <div fxFlex class="img-center ">
+            <img src="assets/images/basicloader.gif " alt=" " srcset=" ">
+        </div>
+    </div>
+</div>

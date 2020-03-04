@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   dashboardData: any = [];
   selectedMonth=moment(new Date()).format("M");
   selectedYear=moment(new Date).format("Y");
+  primaryDashboardData: any[];
   constructor(private httpService: DashboardService) {}
 
   ngOnInit() {
@@ -45,7 +46,8 @@ export class HomeComponent implements OnInit {
     };
     this.httpService.getExTrackingSecondaryDashboardData(obj).subscribe(
       (data: any) => {
-     this.dashboardData=[];
+        this.dashboardData=[];
+
         if (data) {
           this.dashboardData = data;
   
@@ -71,9 +73,9 @@ export class HomeComponent implements OnInit {
     };
     this.httpService.getExTrackingPrimaryDashboardData(obj).subscribe(
       (data: any) => {
-     this.dashboardData=[];
+        this.primaryDashboardData=[]
         if (data) {
-          this.dashboardData = data;
+          this.primaryDashboardData = data;
   
         }
         this.loading = false;

@@ -174,10 +174,12 @@ export class DrawChartComponent implements OnChanges {
       return a + b;
     });
     const brandIds: any = data.map(b => b.family_id);
-    const territoryIds: any = data.map(b => b.territory_id);
-    const regionIds: any = data.map(b => b.region_id);
     let brandDistinctList = [...new Set(brandIds)];
+
+    const territoryIds: any = data.map(b => b.territory_id);
     let territoryDistinctList = [...new Set(territoryIds)];
+
+    const regionIds: any = data.map(b => b.region_id);
     let regionDistinctList = [...new Set(regionIds)];
 
     // console.log('brand, territoryDistinctList data',brandDistinctList,territoryDistinctList);

@@ -1,3 +1,4 @@
-<p>
-  pie-chart works!
-</p>
+<div class="chart">
+    <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend" (chartClick)="chartClicked($event)">
+                  </canvas>
+</div>
