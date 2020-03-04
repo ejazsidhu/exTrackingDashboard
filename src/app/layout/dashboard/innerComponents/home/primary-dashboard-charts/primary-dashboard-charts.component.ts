@@ -23,6 +23,7 @@ export class PrimaryDashboardChartsComponent implements OnInit, OnChanges {
   }
 
   getDistinctFactories(data){
+    this.factoryChartData=[];
     this.loading=true
     const factoryIds: any = data.map(b => b.sendder);
     let factoryDistinctList = [...new Set(factoryIds)];
