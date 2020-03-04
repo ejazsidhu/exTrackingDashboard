@@ -80,7 +80,7 @@ ngOnChanges(changes:SimpleChanges){
   if(changes.inputForBarChart.currentValue){
 
     let dataArray=[...changes.inputForBarChart.currentValue];
-
+debugger
     dataArray.forEach(element => {
 
       let obj={
