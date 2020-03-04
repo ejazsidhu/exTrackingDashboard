@@ -51,7 +51,7 @@
             </mat-card>
         </div>
         <hr/>
-        <!-- <div class="col-md-12 mt-5" *ngIf="brandAchievementAvgList.length>0 && !!selectedZone && zoneClicked">
+        <div class="col-md-6 mt-5" *ngIf="brandAchievementAvgList.length>0">
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>Territory</mat-card-title>
@@ -60,7 +60,17 @@
                     <app-bar-chart [barCharData]="territoryAchievementAvgList" [chartPosition]="'bottom'" [chartName]="'territory'"></app-bar-chart>
                 </mat-card-content>
             </mat-card>
-        </div> -->
+        </div>
+        <div class="col-md-6 mt-5" *ngIf="townAchievementAvgList.length>0">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Town</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <app-bar-chart [barCharData]="townAchievementAvgList" [chartPosition]="'bottom'" [chartName]="'town'"></app-bar-chart>
+                </mat-card-content>
+            </mat-card>
+        </div>
 
 
 
@@ -97,7 +107,7 @@
             </mat-card>
         </div>
 
-        <!-- <div class="col-sm-12 mobile-mt-3 mt-3" *ngIf="brandAchievementAvgList.length>0">
+        <div class="col-sm-12 mobile-mt-3 mt-3" *ngIf="brandAchievementAvgList.length>0">
             <mat-card style="margin-top:15px;width: 400px !important;">
                 <mat-card-header>
                     <mat-card-title>Brand </mat-card-title>
@@ -111,9 +121,9 @@
                 </mat-card-content>
             </mat-card>
         </div>
+        <!-- *ngIf="territoryAchievementAvgList.length>0 && !!selectedZone && zoneClicked" -->
+        <div class="col-sm-12 mobile-mt-3" *ngIf="territoryAchievementAvgList.length>0">
 
-        <div class="col-sm-12 mobile-mt-3" *ngIf="territoryAchievementAvgList.length>0 && !!selectedZone && zoneClicked">
-           
             <mat-card style="margin-top:15px;width: 400px !important;">
                 <mat-card-header>
                     <mat-card-title>Territory</mat-card-title>
@@ -128,9 +138,18 @@
                     </div>
                 </mat-card-content>
             </mat-card>
-        </div> -->
+        </div>
 
-
+        <div class="col-sm-12  mobile-mt-3" *ngIf="townAchievementAvgList.length>0">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Town</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <app-bar-chart [barCharData]="townAchievementAvgList" [chartPosition]="'bottom'" [chartName]="'town'"></app-bar-chart>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
 
     <div class="row" *ngIf="!loading">
