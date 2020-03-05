@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
@@ -48,7 +48,7 @@ export const MY_FORMATS = {
 })
 export class MatMonthPickerComponent  {
 
-
+@Input('dashboardName') dashboardName;
   constructor(private dashboardService:DashboardService) { }
 
   date = new FormControl(moment());
@@ -66,7 +66,8 @@ export class MatMonthPickerComponent  {
     datepicker.close();
     let dateObj={
       month:moment(this.date.value._d).format('M'),
-      year:moment(this.date.value._d).format('Y')
+      year:moment(this.date.value._d).format('Y'),
+      dashboardName:this.dashboardName
     }
   
     this.dashboardService.updatedDate(dateObj)

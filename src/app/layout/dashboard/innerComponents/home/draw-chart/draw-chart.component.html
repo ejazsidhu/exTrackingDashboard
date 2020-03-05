@@ -11,7 +11,7 @@
             <!-- </mat-card-title> -->
             <section class="example-section">
 
-                <mat-month-picker-custom></mat-month-picker-custom>
+                <mat-month-picker-custom [dashboardName]="'secondary'"></mat-month-picker-custom>
 
 
 
@@ -156,6 +156,6 @@
 </div>
 <ng-template #elseTemplate1>
     <div class="text-center mt-5">
-        <h1 style="color: lightgray;">No data Found</h1>
+        <h1 *ngIf="!loading " style="color: lightgray;">No data Found</h1>
     </div>
 </ng-template>

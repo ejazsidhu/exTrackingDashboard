@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DashboardService } from "../../dashboard.service";
 import * as moment from "moment";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-home",
@@ -13,9 +14,16 @@ export class HomeComponent implements OnInit {
   selectedMonth = moment(new Date()).format("M");
   selectedYear = moment(new Date()).format("Y");
   primaryDashboardData: any[];
-  constructor(private httpService: DashboardService) {}
+  regionId=-1;
+  zoneId=-1;
+  constructor(private httpService: DashboardService,private activatedRoute:ActivatedRoute) {}
 
   ngOnInit() {
+
+    this.activatedRoute.queryParams.subscribe(params=>{
+console.log(params)
+    })
+
     this.getEXTPrimaryDashboardData();
 
     setTimeout(() => {
@@ -26,11 +34,14 @@ export class HomeComponent implements OnInit {
       if (date) {
         this.selectedMonth = date.month;
         this.selectedYear = date.year;
+        if(date.dashboardName=='primary')
         this.getEXTPrimaryDashboardData();
 
+      if(date.dashboardName=='secondary'){
         setTimeout(() => {
           this.getEXTSecondaryDashboardData();
         }, 1000);
+      }
       }
     });
   }
